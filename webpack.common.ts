@@ -1,7 +1,6 @@
-const path = require("path");
 module.exports =  {
     entry: {
-        main: "./src/app.tsx",
+        main: "./src/index.tsx",
         vendor: "./src/vendor.js"
     },
     resolve: {
@@ -9,18 +8,6 @@ module.exports =  {
     },
     module: {
         rules: [
-            {
-                test: /\.[j|t]sx?$/i,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        plugins: [
-                            require.resolve('react-refresh/babel')
-                        ]
-                    }
-                }
-            },
             {
                 test: /\.html$/i,
                 use: ['html-loader']

@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin")
 const common = require("./webpack.common")
 const {merge} = require("webpack-merge");
+process.env.HOT = "true";
+process.env.NODE_ENV = "development";
 module.exports =  merge(common, {
     mode: "development",
     optimization:{
@@ -14,6 +16,18 @@ module.exports =  merge(common, {
     },
     module: {
         rules: [
+            {
+                test: /\.[j|t]sx?$/i,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        plugins: [
+                            require.resolve('react-refresh/babel')
+                        ]
+                    }
+                }
+            },
             {
                 test: /\.(s[ac]|c)ss$/,
                 use: ['style-loader', 'css-loader', 'sass-loader']

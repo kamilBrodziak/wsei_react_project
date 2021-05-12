@@ -7,6 +7,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin")
+process.env.HOT = "false";
+process.env.NODE_ENV = "production";
 module.exports =  merge(common, {
     mode: "production",
     output: {
@@ -36,6 +38,13 @@ module.exports =  merge(common, {
     ],
     module: {
         rules: [
+            {
+                test: /\.[j|t]sx?$/i,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                }
+            },
             {
                 test: /\.(s[ac]|c)ss$/,
                 use: [{

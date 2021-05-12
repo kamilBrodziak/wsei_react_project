@@ -1,15 +1,26 @@
 import React from "react";
-import {render} from "react-dom"
+import styled from "styled-components";
+import Header from "./components/Header/Header";
+import GlobalStyle from "./styledHelpers/GlobalStyle";
 
-const t:number = 5;
-import './main.scss'
-
-function App() {
-    return (
-        <div>
-            lolo as zxzx sasa as sa zxzx zx12
-        </div>
-    )
+const SiteContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1024px;
+    margin: 0 auto;
+    height: auto;
+`
+class App extends React.Component {
+    render() {
+        return (
+            <SiteContainer className="App">
+                <GlobalStyle />
+                <Header />
+            </SiteContainer>
+        )
+    }
 }
-export default App
-console.log(render(<App />, document.getElementById("root")));
+
+
+export default App;
