@@ -1,16 +1,18 @@
 import { FC} from 'react'
-import styled from 'styled-components';
+import styled, { FlattenSimpleInterpolation } from 'styled-components';
 import {FlexCentered} from '../../../styledHelpers/Positioning';
 
 const FigureComponent = styled.figure<IProps>`
     width: ${props => props.width};
     height: ${props => props.height};
     ${FlexCentered}
+    ${({css}) => css !== undefined && css}
 `;
 
 interface IProps {
     width: string;
     height: string;
+    css?: FlattenSimpleInterpolation;
 }
 
 

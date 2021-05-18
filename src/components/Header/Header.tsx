@@ -9,26 +9,39 @@ import Icon from '../Common/Icons/Icon';
 import Notifications from './Notifications/Notifications';
 // import {} from '../../styledHelpers/Positioning'
 const HeaderStyled = styled.header`
-    height: auto;
-    width: 100%;
-    box-shadow: 0 0 3px 1px black;
-    padding: 2px 10px;
+    position: sticky;
+    top: 0;
+    left: 0;
+`;
+
+const HeaderContainer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
     position: relative;
-`;
+    height: auto;
+    width: 100%;
+    box-shadow: 0 0 6px 1px gray;
+    border-radius: 5px;
+    padding: 2px 10px;
+`
 
-export default class Header extends React.Component {
+interface IProps {
+
+}
+
+export default class Header extends React.Component<IProps> {
     render() {
         return (
-            <HeaderStyled>
-                <Figure width="50px" height="50px">
-                    <Icon src={iconSrc} alt="Logo" />
-                </Figure>
-                <Nav />
-                <Search />
-                <Notifications />
+            <HeaderStyled id="siteHeader">
+                <HeaderContainer>
+                    <Figure width="50px" height="50px">
+                        <Icon src={iconSrc} alt="Logo" />
+                    </Figure>
+                    <Nav />
+                    <Search />
+                    <Notifications />
+                </HeaderContainer>
             </HeaderStyled>
         )
     }

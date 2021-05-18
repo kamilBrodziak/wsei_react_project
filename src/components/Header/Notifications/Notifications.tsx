@@ -68,7 +68,7 @@ export default class Notifications extends React.Component<IProps, IState> {
     render() {
         const notifications = this.state.notifications.map((el) => {
             return (
-            <Button width={`${iconWidth}px`} height={`${iconWidth}px`} 
+            <Button key={el.key} width={`${iconWidth}px`} height={`${iconWidth}px`} 
                     padding="8px" background="#e2e2e2" borderRadius="50%">
                 <Icon src={el.src} alt={el.alt} />
                 <NotificationCount count={el.count}/>

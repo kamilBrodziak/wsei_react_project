@@ -1,19 +1,21 @@
-// import { FC } from 'react'
-// import styled from 'styled-components';
+import React, {AnchorHTMLAttributes} from 'react';
+import { FC } from 'react'
+import styled, { FlattenSimpleInterpolation } from 'styled-components';
 
-// const Img = styled.img`
-//     max-width: 100%;
-//     max-height: 100%:
-// `
+const LinkStyled = styled.a<IProps>`
+    ${({css}) => css !== undefined && css}
+`
 
+interface IProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+    css?: FlattenSimpleInterpolation;
+}
 
-// const Icon : FC<IconProps> = (props) => {
-//     const {width, height, src, alt} = props;
-//     return (
-//         <ImgContainer width={width} height={height}>
-//             <Img src={src} alt={alt}/>
-//         </ImgContainer>
-//     );
-// }
+const Link:FC<IProps> = ({children, ...other}) => {
+    return (
+        <LinkStyled {...other}>
+            {children}
+        </LinkStyled>
+    );
+}
 
-// export default Icon;
+export default Link;
