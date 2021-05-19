@@ -1,17 +1,18 @@
-import React from 'react'
+import React, { FC, MouseEvent } from 'react'
 import styled, { css } from 'styled-components';
 import List from '../../../../Common/List/List';
 import ListItem from '../../../../Common/List/ListItem';
-import Menu from '../Menu/Menu';
 import MenuItem from '../Menu/MenuItem/MenuItem';
-import logoutIcon from "../../../../../assets/icons/logout.svg";
 import privacyIcon from "../../../../../assets/icons/privacy.svg";
-import settingsIcon from "../../../../../assets/icons/settings.svg";
 import Link from '../../../../Common/Links/Link';
 import Figure from '../../../../Common/Icons/Figure';
 import Icon from '../../../../Common/Icons/Icon';
 import {FlexCentered} from "../../../../../styledHelpers/Positioning";
+import { AccountRoutes, HomeRoute, IAppRoute, IAppRoutes } from '../../../../../Routes/Routes';
 const accountIconWidth = 40;
+
+
+
 
 const AccountStyled = styled.div`
     padding: 2px 0;
@@ -48,6 +49,7 @@ const logoutLinkCss = css`
     ${FlexCentered}
     cursor: pointer;
     padding: 10px 0;
+    text-decoration: none;
 `;
 
 
@@ -76,14 +78,17 @@ const accountLinkCss = css`
     color: #3232bb;
     font-size: 1.6rem;
     cursor: pointer;
+    text-decoration: none;
 `;
 
 
-class Account extends React.Component {
+interface IProps {
+    onClick: (e:MouseEvent, icon?: string, name?: string, iconAlt?: string) => void
+}
 
-
-    onClick = (e:MouseEvent) => {
-        e.preventDefault();
+class Account extends React.Component<IProps> {
+    constructor(props:IProps) {
+        super(props);
     }
 
     logoutOnClick = (e:MouseEvent) => {
@@ -91,40 +96,34 @@ class Account extends React.Component {
     }
 
     render() {
-        const accountName = "Jeanne-Marie de la climbeass";
-        const accountLink = "See profile";
-        const privacyName = "Privacy";
-        const privacyAlt = "Privacy Icon";
-        const privacyUrl = "privacy";
-        const settingsName = "Settings";
-        const settingsAlt = "Settings Icon"
-        const settingsUrl = "settings";
-        const logoutName = "Logout";
-        const logoutUrl = "Logout";
-        const logoutAlt = "Logout Icon";
-        const accountLabel = "Account";
+        const {onClick} = this.props;
+        const profile = AccountRoutes.routes.find((route) => route.name==="Profile");
+        const settings = AccountRoutes.routes.find((route) => route.name==="Settings");
+        const privacy = AccountRoutes.routes.find((route) => route.name==="Privacy");
+        const logout = AccountRoutes.routes.find((route) => route.name==="Logout");
         return (
             <AccountStyled>
-                <List key={0} label={accountLabel} css={accountListCss} labelCss={accountLabelCss}>
+                <List key={0} label={AccountRoutes.label} css={accountListCss} labelCss={accountLabelCss}>
                     <ListItem key={0} css={accountListItemCss}>
                         <Figure css={accountIconCss} width={`${accountIconWidth}px`} height={`${accountIconWidth}px`}>
-                            <Icon src={settingsIcon} alt={settingsAlt}/>
+                            <Icon src={profile.icon} alt={profile.iconAlt}/>
                         </Figure>
                         <AccountDivStyled>
-                            <AccountSpanStyled>{accountName}</AccountSpanStyled>
-                            <Link css={accountLinkCss}>{accountLink}</Link>
+                            <AccountSpanStyled>{profile.name}</AccountSpanStyled>
+                            <Link to={profile.path} css={accountLinkCss} 
+                                onClick={(e) => onClick(e, profile.icon, profile.name, profile.iconAlt)}>See profile</Link>
                         </AccountDivStyled>
                     </ListItem>
-                    <MenuItem onClick={this.onClick} id={1} name={privacyName} 
-                        url={privacyUrl} iconSrc={privacyIcon} iconAlt={privacyAlt}/>
-                    <MenuItem onClick={this.onClick} id={2} name={settingsName} 
-                        url={settingsUrl} iconSrc={settingsIcon} iconAlt={settingsAlt}/>
+                    <MenuItem onClick={onClick} key={1} name={privacy.name}
+                        path={privacy.path} icon={privacyIcon} iconAlt={privacy.iconAlt}/>
+                    <MenuItem onClick={onClick} key={2} name={settings.name} 
+                        path={settings.path} icon={settings.icon} iconAlt={settings.iconAlt}/>
                 </List>
-                <Link css={logoutLinkCss}>
+                <Link css={logoutLinkCss} to={logout.path} onClick={(e) => onClick(e, HomeRoute.icon, HomeRoute.name, HomeRoute.iconAlt)}>
                     <Figure width={"25px"} height={"25px"}>
-                        <Icon src={logoutIcon} alt={logoutAlt}/>
+                        <Icon src={logout.icon} alt={logout.iconAlt}/>
                     </Figure>
-                    <LogoutSpanStyled>{logoutName}</LogoutSpanStyled>
+                    <LogoutSpanStyled>{logout.name}</LogoutSpanStyled>
                 </Link>
             </AccountStyled>
         )

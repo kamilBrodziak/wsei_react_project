@@ -1,8 +1,9 @@
-import React, { FC } from 'react'
+import React, { FC, MouseEvent } from 'react'
 import styled, { css } from 'styled-components';
+import { IAppRoutes } from '../../../../../Routes/Routes';
 import List from '../../../../Common/List/List';
 import ListItem from '../../../../Common/List/ListItem';
-import MenuItem, { IDropdownMenuItemProps } from './MenuItem/MenuItem';
+import MenuItem from './MenuItem/MenuItem';
 const mainListStyle = css`
     list-style: none;
     overflow-y: auto;
@@ -22,30 +23,23 @@ const LabelStyle = css`
     font-size: 1.6rem;
 `;
 
-export interface IDropdownMenuList {
+interface IProps {
+    lists: IAppRoutes[];
     label?: string;
-    id: number;
-    items: IDropdownMenuItemProps[]
-}
+    onClick: (e:MouseEvent, icon?: string, name?: string, iconAlt?: string) => void
 
-export interface IDropdownMenuProps {
-    lists: IDropdownMenuList[];
-    label?: string;
-}
-
-interface IProps extends IDropdownMenuProps {
-    onClick: Function;
 }
 
 const Menu:FC<IProps> = ({lists, onClick}) => {
-    const listsDOM = lists.map(({items, id, label}) => {
+    console.log(lists);
+    const listsDOM = lists.map(({routes,  label}, i:number) => {
         return (
-            <ListItem key={id}>
-                <List label={label} css={nestedListStyle} labelCss={LabelStyle}>
+            <ListItem key={i}>
+                <List key={0} label={label} css={nestedListStyle} labelCss={LabelStyle}>
                     {
-                        items.map(({...others}) => {
+                        routes.map(({...others}, j:number) => {
                             return (
-                                <MenuItem onClick={() => onClick()} {...others}/>
+                                <MenuItem key={j} onClick={onClick} {...others}/>
                             );
                         })
                     }

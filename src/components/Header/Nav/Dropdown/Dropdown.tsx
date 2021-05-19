@@ -1,12 +1,9 @@
-import React, { FC } from 'react'
+import React, { FC, MouseEvent } from 'react'
 import styled from 'styled-components';
-import OutsideClickHandler, { IOutsideClickHandler } from '../../../../Utils/OutsideClickHandler';
-import ScrollableDiv from '../../../Common/Div/ScrollableDiv';
+import AppRoutes, { IAppRoute, IAppRoutes } from '../../../../Routes/Routes';
 import Account from './Account/Account';
 import Filter from './Filter/Filter';
-import Menu, { IDropdownMenuList, IDropdownMenuProps } from './Menu/Menu';
-import { IDropdownMenuItemProps } from './Menu/MenuItem/MenuItem';
-
+import Menu from './Menu/Menu';
 const DropdownStyled = styled.div<IStyledProps>`
     position: absolute;
     background: white;
@@ -20,8 +17,8 @@ const DropdownStyled = styled.div<IStyledProps>`
 `
 
 
-interface IProps extends IDropdownMenuProps {
-    onClick: Function;
+interface IProps {
+    onClick: (e:MouseEvent, icon?: string, name?: string, iconAlt?: string) => void
 }
 
 interface IStyledProps {
@@ -30,39 +27,37 @@ interface IStyledProps {
 
 interface IState {
     height: number;
-    lists: IDropdownMenuList[]
+    lists: IAppRoutes[]
 }
 
 class Dropdown extends React.Component<IProps, IState>{
-    menuLists: IDropdownMenuList[];
-   
+    menuLists: IAppRoutes[];
 
     constructor(props:IProps) {
         super(props);
-        this.menuLists = props.lists;
+        this.menuLists = AppRoutes;
         this.state = {
             height: 0,
-            lists: props.lists
-        }
+            lists: this.menuLists
+        };
         this.handleFilter = this.handleFilter.bind(this);
     }
 
     handleFilter(filter: string) {
         if(filter === "") {
-            console.log(this.menuLists);
             this.setState({lists: this.menuLists});
         } else {
             filter = filter.toUpperCase();
-            let tempLists = [...this.menuLists].map((list:IDropdownMenuList) => {
+            let tempLists = [...this.menuLists].map((list:IAppRoutes) => {
                 list = {...list};
-                list.items.map(item => {return {...item}});
+                list.routes.map(item => {return {...item}});
                 return list;
             })
-            tempLists = tempLists.filter((list: IDropdownMenuList) => {
-                list.items = list.items.filter((item:IDropdownMenuItemProps) => {
+            tempLists = tempLists.filter((list: IAppRoutes) => {
+                list.routes = list.routes.filter((item:IAppRoute) => {
                     return item.name.toUpperCase().indexOf(filter) > -1;
                 })
-                return list.items.length > 0;
+                return list.routes.length > 0;
             });
             this.setState({lists: tempLists});
         }
@@ -70,12 +65,12 @@ class Dropdown extends React.Component<IProps, IState>{
 
 
     render() {
-        const {label, onClick} = this.props;
+        const {onClick} = this.props;
         return (
             <DropdownStyled headerHeight={this.state.height}>
                 <Filter key={0} filterFunction={this.handleFilter} placeholder="Filter..."/>
-                <Menu key={1} lists={this.state.lists} label={label} onClick={onClick}/>
-                <Account key={2} />
+                <Menu key={1} lists={this.state.lists} onClick={onClick}/>
+                <Account key={2} onClick={onClick} />
             </DropdownStyled>
         )
     }

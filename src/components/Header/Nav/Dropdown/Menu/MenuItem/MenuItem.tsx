@@ -1,5 +1,6 @@
-import React, { FC } from 'react'
+import React, { FC, MouseEvent } from 'react'
 import styled, { css } from 'styled-components';
+import { IAppRoute } from '../../../../../../Routes/Routes';
 import { FlexCentered } from '../../../../../../styledHelpers/Positioning';
 import Figure from '../../../../../Common/Icons/Figure';
 import Icon from '../../../../../Common/Icons/Icon';
@@ -25,24 +26,18 @@ const TextStyled = styled.span`
     padding: 0 0 0 5px;
 `;
 
-export interface IDropdownMenuItemProps {
-    name: string;
-    url: string;
-    id: number;
-    iconSrc?: string;
-    iconAlt?: string;
+
+interface IProps extends IAppRoute {
+    onClick: (e:MouseEvent, icon?: string, name?: string, iconAlt?: string) => void
+    key: number;
 }
 
-interface IProps extends IDropdownMenuItemProps {
-    onClick: Function;
-}
-
-const MenuItem:FC<IProps> = ({id, onClick, name, url, iconSrc, iconAlt}) => {
+const MenuItem:FC<IProps> = ({onClick, name, key, path, icon, iconAlt}) => {
     return (
-        <ListItem css={itemStyle} key={id}>
-            <Link href={url} onClick={() => onClick()} css={anchorStyle}>
+        <ListItem css={itemStyle} key={key}>
+            <Link to={path} onClick={(e:MouseEvent) => onClick(e, icon, name, iconAlt)} css={anchorStyle}>
                 <Figure width={`${iconWidth}px`} height={`${iconWidth}px`}>
-                    <Icon src={iconSrc} alt={iconAlt} />
+                    <Icon src={icon} alt={iconAlt} />
                 </Figure>
                 <TextStyled>{name}</TextStyled>
             </Link>
