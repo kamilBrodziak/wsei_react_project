@@ -1,26 +1,32 @@
 import React, { FC, MouseEvent } from 'react'
-import styled, { css } from 'styled-components';
-import { IAppRoutes } from '../../../../../Routes/Routes';
-import List from '../../../../Common/List/List';
-import ListItem from '../../../../Common/List/ListItem';
+import styled, { css }  from 'styled-components';
+import { IAppRoutes } from '../../../../../routes/IRoutes';
 import MenuItem from './MenuItem/MenuItem';
-const mainListStyle = css`
+
+const MainListStyled = styled.ul`
     list-style: none;
     overflow-y: auto;
     overflow-x: hidden;
     border: solid #e6e6e6;
     border-width: 0 0 2px 0;
     padding: 2px 10px;
+    font-size: 1.8rem;
+    flex: 1;
+    height: 300px;
 `
 
-const nestedListStyle = css`
+const NestedListStyled = styled.ul`
     list-style: none;
-    padding: 2px;
+    padding: 5px;
 `;
 
-const LabelStyle = css`
+const NestedListLabelStyled = styled.span`
     color: #707070;
     font-size: 1.6rem;
+`;
+
+const ListItemStyled = styled.li`
+
 `;
 
 interface IProps {
@@ -31,11 +37,11 @@ interface IProps {
 }
 
 const Menu:FC<IProps> = ({lists, onClick}) => {
-    console.log(lists);
     const listsDOM = lists.map(({routes,  label}, i:number) => {
         return (
-            <ListItem key={i}>
-                <List key={0} label={label} css={nestedListStyle} labelCss={LabelStyle}>
+            <ListItemStyled key={i}>
+                <NestedListLabelStyled>{label}</NestedListLabelStyled>
+                <NestedListStyled key={0}>
                     {
                         routes.map(({...others}, j:number) => {
                             return (
@@ -43,14 +49,14 @@ const Menu:FC<IProps> = ({lists, onClick}) => {
                             );
                         })
                     }
-                </List>
-            </ListItem>
+                </NestedListStyled>
+            </ListItemStyled>
         );
     })
     return (
-        <List css={mainListStyle}>
-            {listsDOM}
-        </List>
+        <MainListStyled>
+            {listsDOM.length > 0 ? listsDOM : "No matches"}
+        </MainListStyled>
     );
 }
 

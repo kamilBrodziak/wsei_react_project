@@ -1,16 +1,14 @@
 import React from 'react'
-import FigureIcon from '../../Common/Icons/Figure';
 import commentsIconSrc from "../../../assets/icons/comments.svg"
 import bellIconSrc from "../../../assets/icons/bell.svg"
 import homeIconSrc from "../../../assets/icons/house.svg"
-
 import Button from '../../Common/Buttons/Button'
-import styled from 'styled-components';
-import {FlexCentered} from '../../../styledHelpers/Positioning';
+import styled, { css } from 'styled-components';
 import Icon from '../../Common/Icons/Icon';
-import Notification from './NotificationCount/NotificationCount';
 import Breakpoints from '../../../styledHelpers/Breakpoints';
 import NotificationCount from './NotificationCount/NotificationCount';
+import Link from '../../Common/Links/Link'
+import { HomeRoute } from '../../../routes/PlatformRoutes'
 const iconWidth = 40;
 const containerWidth = 140;
 const Container = styled.div`
@@ -18,18 +16,38 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    width: ${iconWidth * 2};
-    height: ${containerWidth};
+    width: ${iconWidth}px;
+    height: ${containerWidth}px;
     position: fixed;
     bottom: 5px;
     right: 5px;
     @media ${Breakpoints.tablet} {
-        width: ${containerWidth};
+        width: ${containerWidth}px;
         height: 100%;
         flex-direction: row;
         position: static;
     }
 `
+
+const defaultButtonCss = css`
+    width: ${iconWidth}px;
+    height: ${iconWidth}px;
+    padding: 8px;
+    border: 0;
+    outline: none;
+    background: none;
+    cursor: pointer;
+`
+
+const HomeLinkStyled = styled(Link)`
+    ${defaultButtonCss}
+`
+
+const NotificationButtonStyled = styled(Button)`
+    ${defaultButtonCss}
+    background: #e2e2e2;
+    border-radius: 50%;    
+`;  
 
 interface INotification {
     key: number;
@@ -68,19 +86,17 @@ export default class Notifications extends React.Component<IProps, IState> {
     render() {
         const notifications = this.state.notifications.map((el) => {
             return (
-            <Button key={el.key} width={`${iconWidth}px`} height={`${iconWidth}px`} 
-                    padding="8px" background="#e2e2e2" borderRadius="50%">
+            <NotificationButtonStyled key={el.key} width={`${iconWidth}px`} height={`${iconWidth}px`}>
                 <Icon src={el.src} alt={el.alt} />
                 <NotificationCount count={el.count}/>
-            </Button>);
+            </NotificationButtonStyled>);
         })
         return (
             <Container>
-                <Button width={`${iconWidth}px`} height={`${iconWidth}px`} 
-                    padding="8px">
+                <HomeLinkStyled to={HomeRoute.path}>
                     <Icon src={homeIconSrc} alt="Home"/>
-                </Button>
-                {notifications}
+                </HomeLinkStyled>
+                {notifications} 
             </Container>
         )
     }

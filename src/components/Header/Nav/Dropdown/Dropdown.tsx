@@ -1,6 +1,9 @@
 import React, { FC, MouseEvent } from 'react'
+import { connect } from 'react-redux';
 import styled from 'styled-components';
-import AppRoutes, { IAppRoute, IAppRoutes } from '../../../../Routes/Routes';
+import { IAppRoute, IAppRoutes } from '../../../../routes/IRoutes';
+import AppRoutes from '../../../../routes/Routes';
+import Breakpoints from '../../../../styledHelpers/Breakpoints';
 import Account from './Account/Account';
 import Filter from './Filter/Filter';
 import Menu from './Menu/Menu';
@@ -10,15 +13,22 @@ const DropdownStyled = styled.div<IStyledProps>`
     box-shadow: 0 6px 6px 1px gray;
     top: 100%;
     max-height: calc(100vh - ${({headerHeight}) => headerHeight}px);
-    width: 250px;
+    left:0;
+    width: 100vw;
+    z-index: 999;
     color: #707070;
-    flex:1;
     cursor: initial;
+    display: flex;
+    flex-direction: column;
+
+    @media ${Breakpoints.tablet} {
+        width: 250px;
+        max-height: 600px;
+    }
 `
 
-
 interface IProps {
-    onClick: (e:MouseEvent, icon?: string, name?: string, iconAlt?: string) => void
+    onClick: (e:MouseEvent) => void
 }
 
 interface IStyledProps {
@@ -41,6 +51,20 @@ class Dropdown extends React.Component<IProps, IState>{
             lists: this.menuLists
         };
         this.handleFilter = this.handleFilter.bind(this);
+    }
+
+    changeHeight() {
+        const headerHeight = document.getElementById("siteHeader").clientHeight;
+        this.setState({height:headerHeight});
+    }
+
+    componentDidMount() {
+        this.changeHeight();
+        document.addEventListener('resize', this.changeHeight)
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('resize', this.changeHeight)
     }
 
     handleFilter(filter: string) {

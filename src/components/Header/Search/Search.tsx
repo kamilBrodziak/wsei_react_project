@@ -4,13 +4,13 @@ import iconSrc from "../../../assets/icons/search.svg"
 import styled from 'styled-components';
 import {FlexCentered} from '../../../styledHelpers/Positioning';
 import Button from '../../Common/Buttons/Button'
+import Breakpoints from '../../../styledHelpers/Breakpoints';
 const iconWidth = 25;
 const formWidth = 400;
 const SearchForm = styled.form`
     display: flex;
     flex-direction: row;
     position: relative;
-    width: ${formWidth}px;
     height: 100%;
     ${FlexCentered}
     flex-direction: row;
@@ -18,10 +18,15 @@ const SearchForm = styled.form`
     margin: 2px auto;
     border: 2px solid #e6e6e6;
     border-radius: 5px;
+
+    @media ${Breakpoints.tablet} {
+        width: ${formWidth}px;
+    }
 `
 
 const SearchInput = styled.input`
     flex: 1;
+    width: 100%;
     height: 100%;
     border: 0;
     outline: 0;

@@ -9,6 +9,7 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "allowSyntheticDefaultImports": true,
+        "moduleResolution": "node",
         "types": [
             "node",
             "webpack-env"

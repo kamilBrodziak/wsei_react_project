@@ -1,18 +1,17 @@
 import React, { FC, MouseEvent } from 'react'
-import styled, { css } from 'styled-components';
-import { IAppRoute } from '../../../../../../Routes/Routes';
+import styled from 'styled-components';
+import { IAppRoute } from '../../../../../../routes/IRoutes';
 import { FlexCentered } from '../../../../../../styledHelpers/Positioning';
 import Figure from '../../../../../Common/Icons/Figure';
 import Icon from '../../../../../Common/Icons/Icon';
 import Link from '../../../../../Common/Links/Link';
-import ListItem from '../../../../../Common/List/ListItem';
 const iconWidth = 25;
 
-const itemStyle = css`
+const ListItemStyled = styled.li`
     margin: 0 0 5px 0;
 `;
 
-const anchorStyle = css`
+const LinkStyled = styled(Link)`
     ${FlexCentered}
     padding: 5px 0;
     flex-direction: row;
@@ -28,20 +27,20 @@ const TextStyled = styled.span`
 
 
 interface IProps extends IAppRoute {
-    onClick: (e:MouseEvent, icon?: string, name?: string, iconAlt?: string) => void
+    onClick: (e:MouseEvent) => void
     key: number;
 }
 
 const MenuItem:FC<IProps> = ({onClick, name, key, path, icon, iconAlt}) => {
     return (
-        <ListItem css={itemStyle} key={key}>
-            <Link to={path} onClick={(e:MouseEvent) => onClick(e, icon, name, iconAlt)} css={anchorStyle}>
+        <ListItemStyled key={key}>
+            <LinkStyled to={path} pageName={name} onClick={(e:MouseEvent) => onClick(e)}>
                 <Figure width={`${iconWidth}px`} height={`${iconWidth}px`}>
                     <Icon src={icon} alt={iconAlt} />
                 </Figure>
                 <TextStyled>{name}</TextStyled>
-            </Link>
-        </ListItem>
+            </LinkStyled>
+        </ListItemStyled>
     );
 }
 

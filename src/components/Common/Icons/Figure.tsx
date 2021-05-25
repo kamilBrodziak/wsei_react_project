@@ -6,13 +6,11 @@ const FigureComponent = styled.figure<IProps>`
     width: ${props => props.width};
     height: ${props => props.height};
     ${FlexCentered}
-    ${({css}) => css !== undefined && css}
 `;
 
 interface IProps {
     width: string;
     height: string;
-    css?: FlattenSimpleInterpolation;
 }
 
 

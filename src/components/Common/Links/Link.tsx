@@ -4,11 +4,10 @@ import styled, { FlattenSimpleInterpolation } from 'styled-components';
 import { LinkProps, NavLink } from 'react-router-dom'
 
 const LinkStyled = styled(NavLink)<IProps>`
-    ${({css}) => css !== undefined && css}
 `
 
 interface IProps extends LinkProps {
-    css?: FlattenSimpleInterpolation;
+    pageName: string
 }
 
 const Link:FC<IProps> = ({children, ...other}) => {

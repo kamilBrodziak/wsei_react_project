@@ -3,15 +3,16 @@ import styled from 'styled-components';
 import Breakpoints from '../../../styledHelpers/Breakpoints';
 import Dropdown from './Dropdown/Dropdown';
 import UpperNav from './UpperNav/UpperNav';
-import { HomeRoute } from '../../../Routes/Routes';
 import useDropdown from '../../../../node_modules/react-dropdown-hook/build/index';
+import { HomeRoute } from '../../../routes/PlatformRoutes';
 
 const NavContainer = styled.nav`
-    width: 100%;
     height: 100%;
     @media ${Breakpoints.tablet} {
+        width: 100%;
         width: 250px;
     }
+    position: relative;
 `
 
 interface IState {
@@ -23,24 +24,15 @@ interface IProps{
 }
 
 const Nav:FC<IProps> = (props:IProps) => {
-    const [state, setState] = useState({
-        icon: HomeRoute.icon,
-        name: HomeRoute.name
-    }
-    );
     const [wrapperRef, dropdownOpen, toggleDropdown, closeDropdown] = useDropdown();
     
-    const onLinkClick = (e:MouseEvent, icon: string,name: string, iconAlt: string) => {
-        setState({
-            icon:icon,
-            name: name
-        })
+    const onLinkClick = (e:MouseEvent) => {
         closeDropdown();
     }
         
     return (
         <NavContainer ref={wrapperRef}>
-            <UpperNav activeIcon={state.icon} activeText={state.name} changeOpen={toggleDropdown} />
+            <UpperNav changeOpen={toggleDropdown} />
             {dropdownOpen && <Dropdown onClick={onLinkClick}/>}
         </NavContainer>
     )
