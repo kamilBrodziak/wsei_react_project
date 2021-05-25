@@ -28,13 +28,12 @@ const TextStyled = styled.span`
 
 interface IProps extends IAppRoute {
     onClick: (e:MouseEvent) => void
-    key: number;
 }
 
-const MenuItem:FC<IProps> = ({onClick, name, key, path, icon, iconAlt}) => {
+const MenuItem:FC<IProps> = ({onClick, name, path, icon, iconAlt}) => {
     return (
-        <ListItemStyled key={key}>
-            <LinkStyled to={path} pageName={name} onClick={(e:MouseEvent) => onClick(e)}>
+        <ListItemStyled >
+            <LinkStyled to={path} onClick={(e:MouseEvent) => onClick(e)}>
                 <Figure width={`${iconWidth}px`} height={`${iconWidth}px`}>
                     <Icon src={icon} alt={iconAlt} />
                 </Figure>

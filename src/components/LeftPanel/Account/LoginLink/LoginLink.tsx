@@ -26,11 +26,10 @@ const FigureStyled = styled.figure`
 
 interface IProps {
     type: string;
-    onClick: (e:React.MouseEvent, icon?: string, name?: string, iconAlt?: string) => void;
 }
 
 
-const LoginLink:FC<IProps> = ({type, onClick}) => {
+const LoginLink:FC<IProps> = ({type}) => {
     let component : IAppRoute = null;
     if(type == "Login") {
         component = AccountRoutes.routes.find(route => route.name === "Login");
@@ -38,11 +37,11 @@ const LoginLink:FC<IProps> = ({type, onClick}) => {
         component = AccountRoutes.routes.find(route => route.name === "Register");
     }
     return (
-        <LoginLinkStyled to={component.path} pageName={component.name} onClick={(e) => onClick(e, component.icon, component.name, component.iconAlt)}>
+        <LoginLinkStyled to={component.path} >
             <FigureStyled>
                 <Icon src={component.icon} alt={component.iconAlt} />
             </FigureStyled>
-            <SpanStyled>Login</SpanStyled>
+            <SpanStyled>{component.name}</SpanStyled>
         </LoginLinkStyled>
     )
 }

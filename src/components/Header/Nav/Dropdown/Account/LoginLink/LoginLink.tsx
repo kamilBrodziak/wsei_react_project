@@ -33,7 +33,7 @@ const LoginLink:FC<IProps> = ({onClick, type}) => {
         component = AccountRoutes.routes.find(route => route.name === "Register");
     }
     return (
-        <LoginLinkStyled to={component.path} pageName={component.name} onClick={onClick}>
+        <LoginLinkStyled to={component.path} onClick={onClick}>
             <Figure width={"25px"} height={"25px"}>
                 <Icon src={component.icon} alt={component.iconAlt}/>
             </Figure>

@@ -38,7 +38,10 @@ const Account:FC<IProps> = ({user, loading}) => {
         )
     } else {
         content = (
-            <LoginLink />
+            <>
+                <LoginLink type="Login"/>
+                <LoginLink type="Register"/>
+            </>
         )
     }
     return (

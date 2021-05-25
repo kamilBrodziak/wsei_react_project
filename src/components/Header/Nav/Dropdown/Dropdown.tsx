@@ -92,9 +92,9 @@ class Dropdown extends React.Component<IProps, IState>{
         const {onClick} = this.props;
         return (
             <DropdownStyled headerHeight={this.state.height}>
-                <Filter key={0} filterFunction={this.handleFilter} placeholder="Filter..."/>
-                <Menu key={1} lists={this.state.lists} onClick={onClick}/>
-                <Account key={2} onClick={onClick} />
+                <Filter filterFunction={this.handleFilter} placeholder="Filter..."/>
+                <Menu lists={this.state.lists} onClick={onClick}/>
+                <Account onClick={onClick} />
             </DropdownStyled>
         )
     }

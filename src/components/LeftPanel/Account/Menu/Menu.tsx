@@ -57,9 +57,9 @@ const Menu:FC = () => {
         alt: "Add publication icon",
         route: PlatformRoutes.routes.find(el => el.name === "Publications" )
     };
-    const elements = [network, publications].map(el => {
+    const elements = [network, publications].map((el, i) => {
         return (
-            <LiStyled>
+            <LiStyled key={i}>
                 <IconContainerStyled width="25px" height="25px">
                     <Icon src={el.route.icon} alt={el.route.iconAlt} />
                 </IconContainerStyled>

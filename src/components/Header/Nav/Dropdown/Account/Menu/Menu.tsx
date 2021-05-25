@@ -67,25 +67,29 @@ const Menu:FC<IProps> = ({onClick, user}) => {
     const profilePath = `${profile.path}/${user?.id}`;
     const settings = AccountRoutes.routes.find((route) => route.name==="Settings");
     const privacy = AccountRoutes.routes.find((route) => route.name==="Privacy");
+    let key = 0;
     return (
-        <AccountListStyled key={0}>
-            <AccountLabelStyled>{AccountRoutes.label}</AccountLabelStyled>
-            <AccountListItemStyled key={0}>
-                <AccountIconContainerStyled width={`${accountIconWidth}px`} height={`${accountIconWidth}px`}>
-                    <Icon src={user?.photo?.thumbnailUrl} alt={user?.photo?.title}/>
-                </AccountIconContainerStyled>
-                <AccountDivStyled>
-                    <AccountSpanStyled>{user.name}</AccountSpanStyled>
-                    <AccountLinkStyled to={profilePath} pageName={profile.name}>
-                            See profile
-                    </AccountLinkStyled>
-                </AccountDivStyled>
-            </AccountListItemStyled>
-            <MenuItem key={1} name={privacy.name} onClick={onClick}
-                path={privacy.path} icon={privacy.icon} iconAlt={privacy.iconAlt}/>
-            <MenuItem key={2} name={settings.name} onClick={onClick}
-                path={settings.path} icon={settings.icon} iconAlt={settings.iconAlt}/>
-        </AccountListStyled>
+        <>
+            
+            <AccountLabelStyled key={key++}>{AccountRoutes.label}</AccountLabelStyled>
+            <AccountListStyled key={key++}>
+                <AccountListItemStyled key={key++}>
+                    <AccountIconContainerStyled width={`${accountIconWidth}px`} height={`${accountIconWidth}px`}>
+                        <Icon src={user?.photo?.thumbnailUrl} alt={user?.photo?.title}/>
+                    </AccountIconContainerStyled>
+                    <AccountDivStyled>
+                        <AccountSpanStyled>{user.name}</AccountSpanStyled>
+                        <AccountLinkStyled to={profilePath}>
+                                See profile
+                        </AccountLinkStyled>
+                    </AccountDivStyled>
+                </AccountListItemStyled>
+                <MenuItem key={key++} name={privacy.name} onClick={onClick}
+                    path={privacy.path} icon={privacy.icon} iconAlt={privacy.iconAlt}/>
+                <MenuItem key={key++} name={settings.name} onClick={onClick}
+                    path={settings.path} icon={settings.icon} iconAlt={settings.iconAlt}/>
+            </AccountListStyled>
+        </>
     );
 }
 

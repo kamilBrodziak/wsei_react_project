@@ -33,12 +33,11 @@ const Menu:FC = () => {
     const publications = PlatformRoutes.routes.find(el => el.name === "Publications");
     const ecosystem = PlatformRoutes.routes.find(el => el.name === "Entities");
     const entities = PlatformRoutes.routes.find(el => el.name === "Entities");
-
-    const elements = [publications, ecosystem, entities].map(el => {
+    const elements = [publications, ecosystem, entities].map((el, i) => {
         return (
-            <LiStyled>
+            <LiStyled key={i}>
                 <IconContainerStyled width="35px" height="35px">
-                    <Icon src={el.icon} alt={el.iconAlt}/>
+                    <Icon src={el.icon} alt={el.iconAlt} />
                 </IconContainerStyled>
                 <LinkStyled to={el.path}>{el.name}</LinkStyled>
             </LiStyled>

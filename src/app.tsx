@@ -4,7 +4,7 @@ import Header from "./components/Header/Header";
 import GlobalStyle from "./styledHelpers/GlobalStyle";
 import { BrowserRouter, Route } from "react-router-dom"
 import Home from "./components/Pages/Platform/Home/Home";
-import AppRoutes from "./routes/Routes";
+import AppRoutes, { AllRoutes } from "./routes/Routes";
 import ComponentRegistry from "./routes/ComponentRegistry";
 import AccountRoutes from "./routes/AccountRoutes";
 import LeftPanel from "./components/LeftPanel/LeftPanel";
@@ -36,6 +36,7 @@ const ContentContainer = styled.section`
 
 
 const App:FC = (props) => {
+    let key = 0;
     return (
         <BrowserRouter>
             <SiteContainer className="App">
@@ -44,9 +45,9 @@ const App:FC = (props) => {
                 <MainContainer>
                     <LeftPanel />
                     <ContentContainer>
-                        {AppRoutes.concat(AccountRoutes).map(({routes}) => {
+                        {AllRoutes.map(({routes}) => {
                             return routes.map(({exact,name, path}) => {
-                                return <Route exact={exact} path={path} component={ComponentRegistry[name]} />
+                                return <Route key={key++} exact={exact} path={path} component={ComponentRegistry[name]} />
                             })
                         })}
                     </ContentContainer>

@@ -30,7 +30,7 @@ interface IProps {
 const LogoutLink:FC<IProps> = ({onClick}) => {
     const logout = AccountRoutes.routes.find((route) => route.name==="Logout");
     return (
-        <LogoutLinkStyled to={logout.path} pageName={"Home"} onClick={onClick}>
+        <LogoutLinkStyled to={logout.path} onClick={onClick}>
             <Figure width={"25px"} height={"25px"}>
                 <Icon src={logout.icon} alt={logout.iconAlt}/>
             </Figure>

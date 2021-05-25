@@ -37,15 +37,16 @@ interface IProps {
 }
 
 const Menu:FC<IProps> = ({lists, onClick}) => {
-    const listsDOM = lists.map(({routes,  label}, i:number) => {
+    let key = 0;
+    const listsDOM = lists.map(({routes,  label}) => {
         return (
-            <ListItemStyled key={i}>
+            <ListItemStyled key={key++}>
                 <NestedListLabelStyled>{label}</NestedListLabelStyled>
-                <NestedListStyled key={0}>
+                <NestedListStyled key={key++}>
                     {
-                        routes.map(({...others}, j:number) => {
+                        routes.map(({...others}) => {
                             return (
-                                <MenuItem key={j} onClick={onClick} {...others}/>
+                                <MenuItem key={key++} onClick={onClick} {...others}/>
                             );
                         })
                     }
