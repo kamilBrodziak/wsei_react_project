@@ -32,6 +32,7 @@ const MainContainer = styled.section`
 
 const ContentContainer = styled.section`
     margin: 0 40px;
+    flex: 1;
 `;
 
 

@@ -1,4 +1,6 @@
 import { AnyAction, Dispatch } from "redux";
+import { IUserState } from "../reducers/userReducer";
+import { IUser } from "../Utils/IRestObjects";
 import RestService from "../utils/RestService"
 
 export enum UserActionsEnum {
@@ -16,18 +18,33 @@ export function fetchUser(id:number) {
 }
 
 export const loginUser = (id: number) => async(dispatch:any) => {
-    const user = await RestService.getUser(id);
-    user.photo = await RestService.getPhoto(user.id);
+    let error = null;
     dispatch({
         type: UserActionsEnum.LOGIN,
-        user: user
+        user: null,
+        loading: true,
+        error: error
+    });
+    let user = await RestService.getUser(id);
+    if(Object.keys(user).length > 1) {
+        user.photo = await RestService.getPhoto(user.id);
+    } else {
+        user = null;
+        error = 'There is no such user with given id';
+    }
+    dispatch({
+        type: UserActionsEnum.LOGIN,
+        user: user,
+        loading: false,
+        error: error
     });
 }
 
-export function logoutUser(id: number) {
+export const logoutUser = () => {
     return {
         type: UserActionsEnum.LOGOUT,
-        id: id
+        user: null,
+        loading: false
     }
 }
 

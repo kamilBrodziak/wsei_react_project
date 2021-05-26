@@ -1,7 +1,9 @@
 import React, { FC } from 'react'
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { logoutUser } from '../../../../../../actions/UserActions';
+import { IStore } from '../../../../../../reducers/rootReducer';
 import AccountRoutes from '../../../../../../routes/AccountRoutes';
-import { IAppRoute } from '../../../../../../routes/IRoutes';
 import { FlexCentered } from '../../../../../../styledHelpers/Positioning';
 import Figure from '../../../../../Common/Icons/Figure';
 import Icon from '../../../../../Common/Icons/Icon';
@@ -26,12 +28,7 @@ interface IProps {
 }
 
 const LoginLink:FC<IProps> = ({onClick, type}) => {
-    let component : IAppRoute = null;
-    if(type == "Login") {
-        component = AccountRoutes.routes.find(route => route.name === "Login");
-    } else {
-        component = AccountRoutes.routes.find(route => route.name === "Register");
-    }
+    const component = AccountRoutes.routes.find(route => route.name === type);
     return (
         <LoginLinkStyled to={component.path} onClick={onClick}>
             <Figure width={"25px"} height={"25px"}>
@@ -41,5 +38,7 @@ const LoginLink:FC<IProps> = ({onClick, type}) => {
         </LoginLinkStyled>
     )
 }
+
+
 
 export default LoginLink;

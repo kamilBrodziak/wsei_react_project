@@ -1,6 +1,10 @@
-import React, { FC } from 'react'
+import React, { Dispatch, FC } from 'react'
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { logoutUser } from '../../../../../../actions/UserActions';
+import { IStore } from '../../../../../../reducers/rootReducer';
 import AccountRoutes from '../../../../../../routes/AccountRoutes';
+import PlatformRoutes from '../../../../../../Routes/PlatformRoutes';
 import { FlexCentered } from '../../../../../../styledHelpers/Positioning';
 import Figure from '../../../../../Common/Icons/Figure';
 import Icon from '../../../../../Common/Icons/Icon';
@@ -28,15 +32,17 @@ interface IProps {
 }
 
 const LogoutLink:FC<IProps> = ({onClick}) => {
-    const logout = AccountRoutes.routes.find((route) => route.name==="Logout");
+    const logoutComponent = AccountRoutes.routes.find((route) => route.name==="Logout");
     return (
-        <LogoutLinkStyled to={logout.path} onClick={onClick}>
+        <LogoutLinkStyled to={logoutComponent.path} onClick={onClick}>
             <Figure width={"25px"} height={"25px"}>
-                <Icon src={logout.icon} alt={logout.iconAlt}/>
+                <Icon src={logoutComponent.icon} alt={logoutComponent.iconAlt}/>
             </Figure>
-            <LogoutSpanStyled>{logout.name}</LogoutSpanStyled>
+            <LogoutSpanStyled>{logoutComponent.name}</LogoutSpanStyled>
         </LogoutLinkStyled>
     )
 }
+
+
 
 export default LogoutLink;

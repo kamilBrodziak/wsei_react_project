@@ -34,6 +34,12 @@ const SearchInput = styled.input`
     font-size: 1.8rem;
 `;
 
+const ButtonStyled = styled(Button)`
+    background: none;
+    border: 0;
+    outline: none;
+`;
+
 interface IState {
     search: string
 }
@@ -53,9 +59,9 @@ export default class Search extends React.Component<IProps, IState> {
         return (
             <SearchForm>
                 <SearchInput onChange={this.onChange} placeholder="Search Legalcluster"/>
-                <Button width={`${iconWidth}px`} height="100%">
+                <ButtonStyled width={`${iconWidth}px`} height="100%">
                     <Icon src={iconSrc} alt="Logo" />
-                </Button>
+                </ButtonStyled>
             </SearchForm>
         )
     }

@@ -2,26 +2,35 @@ import React, { FC, MouseEvent } from 'react'
 import styled from 'styled-components';
 import AccountRoutes from '../../../../routes/AccountRoutes';
 import { IAppRoute } from '../../../../routes/IRoutes';
+import Colors from '../../../../styledHelpers/Colors';
 import { FlexCentered } from '../../../../styledHelpers/Positioning';
+import Figure from '../../../Common/Icons/Figure';
 import Icon from '../../../Common/Icons/Icon';
 import Link from '../../../Common/Links/Link';
 
 
 const LoginLinkStyled = styled(Link)`
-    width: 100%;
+    width: 150px;
     color: black;
     cursor: pointer;
-    ${FlexCentered}    
+    ${FlexCentered}
+    text-decoration: none;
+    margin: 0 auto;
+    margin: 10px 0;
+    font-weight: bold;
+    color: ${Colors.gray};
+    padding: 10px 0;
 `;
 
 const SpanStyled = styled.span`
-    padding: 0 0 0 10px;
+    padding: 0 0 0 20px;
     font-size: 1.7rem;
+    flex: 1;
 `
 
-const FigureStyled = styled.figure`
-    width: 40px;
-    height: 40px;
+const FigureStyled = styled(Figure)`
+    justify-content: flex-end;
+    flex: 1;
 `
 
 interface IProps {
@@ -30,15 +39,10 @@ interface IProps {
 
 
 const LoginLink:FC<IProps> = ({type}) => {
-    let component : IAppRoute = null;
-    if(type == "Login") {
-        component = AccountRoutes.routes.find(route => route.name === "Login");
-    } else {
-        component = AccountRoutes.routes.find(route => route.name === "Register");
-    }
+    const component = AccountRoutes.routes.find(route => route.name === type);
     return (
         <LoginLinkStyled to={component.path} >
-            <FigureStyled>
+            <FigureStyled width="40px" height="30px">
                 <Icon src={component.icon} alt={component.iconAlt} />
             </FigureStyled>
             <SpanStyled>{component.name}</SpanStyled>

@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { IStore } from '../../../reducers/rootReducer';
+import { FlexCentered } from '../../../styledHelpers/Positioning';
 import { IUser } from '../../../Utils/IRestObjects';
 import Loading from '../../Common/Animations/Loading';
 import Details from './Details/Details';
@@ -9,7 +10,7 @@ import LoginLink from './LoginLink/LoginLink';
 import Menu from './Menu/Menu';
 
 const AccountStyled = styled.div`
-    display: flex;
+    ${FlexCentered}
     flex-direction: column;
     box-shadow: 1px 2px 2px 1px lightgray;
     border-radius: 5px;

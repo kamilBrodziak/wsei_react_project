@@ -14,6 +14,7 @@ import Colors from '../../../../styledHelpers/Colors';
 const ListStyled = styled.ul`
     list-style: none;
     padding: 10px 20px;
+    width: 100%;
 `;
 
 const LiStyled = styled.li`
