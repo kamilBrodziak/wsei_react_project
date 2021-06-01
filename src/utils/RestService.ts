@@ -10,6 +10,10 @@ class RestService {
     public static getUser(id: number) : Promise<IUser> {
         return fetch(`${API}/users/${id}`).then(response => response.json());
     }
+
+    // public static getPost(id: number) : Promise {
+
+    // }
 }
 
 export default RestService;

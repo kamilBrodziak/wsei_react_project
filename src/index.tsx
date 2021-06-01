@@ -12,6 +12,6 @@ const store = createStore(
     applyMiddleware(thunk)
 );
 
-store.dispatch(loginUser(1));
+store.dispatch((dispatch:any) => dispatch(loginUser(1)));
 
 render(<Provider store={store}><App /></Provider>, document.getElementById("root"));

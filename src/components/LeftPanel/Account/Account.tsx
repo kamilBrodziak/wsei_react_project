@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { getLoggedUser } from '../../../actions/UserActions';
 import { IStore } from '../../../reducers/rootReducer';
 import { FlexCentered } from '../../../styledHelpers/Positioning';
 import { IUser } from '../../../Utils/IRestObjects';
@@ -55,8 +56,8 @@ const Account:FC<IProps> = ({user, loading}) => {
 
 const mapStateToProps = (state:IStore) => {
     return {
-        user: state.userState.user,
-        loading: state.userState.loading
+        user: getLoggedUser(state.userState),
+        loading: state.userState.loginLoading
     }
 }
 

@@ -7,6 +7,7 @@ import Menu from './Menu/Menu';
 import Loading from '../../../../Common/Animations/Loading';
 import LogoutLink from './LogoutLink/LogoutLink';
 import LoginLink from './LoginLink/LoginLink';
+import { getLoggedUser } from '../../../../../actions/UserActions';
 
 const AccountStyled = styled.div`
     padding: 2px 0;
@@ -47,8 +48,8 @@ const Account:FC<IProps> = ({onClick, user, loading}) => {
 
 const mapStateToProps = (state : IStore) => {
     return {
-        user: state.userState.user,
-        loading: state.userState.loading
+        user: getLoggedUser(state.userState),
+        loading: state.userState.loginLoading
     }
 }
 

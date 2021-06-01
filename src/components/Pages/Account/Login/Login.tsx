@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { connect } from 'react-redux';
 import { RouteComponentProps, RouteProps, RouterProps } from 'react-router';
 import styled from 'styled-components';
-import { loginUser } from '../../../../actions/UserActions';
+import { getLoggedUser, loginUser } from '../../../../actions/UserActions';
 import { IStore } from '../../../../reducers/rootReducer';
 import AccountRoutes from '../../../../routes/AccountRoutes';
 import Colors from '../../../../styledHelpers/Colors';
@@ -68,11 +68,13 @@ interface IProps extends RouteComponentProps{
 
 interface IState {
     id: number;
+    showError: boolean;
 } 
 
 class Login extends React.Component<IProps, IState> {
     state = {
-        id: 0
+        id: 0,
+        showError: false
     }
     
     constructor(props:IProps) {
@@ -102,6 +104,7 @@ class Login extends React.Component<IProps, IState> {
     onSubmit(e:React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         this.props.login(this.state.id);
+        this.setState({showError: true});
     }
 
     render() {
@@ -116,7 +119,7 @@ class Login extends React.Component<IProps, IState> {
                         Login
                     </SubmitStyled>
                 </FormStyled>
-                {this.props.error && <SpanStyled>{this.props.error}</SpanStyled>}
+                {this.props.error && this.state.showError && <SpanStyled>{this.props.error}</SpanStyled>}
             </LoginStyled>
         )
     }
@@ -124,8 +127,8 @@ class Login extends React.Component<IProps, IState> {
 
 const mapStateToProps = (state:IStore) => {
     return {
-        loading: state.userState.loading,
-        user: state.userState.user,
+        loading: state.userState.loginLoading,
+        user: getLoggedUser(state.userState),
         error: state.userState.error
     }
 }

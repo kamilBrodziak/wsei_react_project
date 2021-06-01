@@ -10,6 +10,7 @@ const AccountRoutes: IAppRoutes = {
         {
             name: 'Profile',
             path: '/profile',
+            exact: true,
             icon: HomeIcon
         },
         {

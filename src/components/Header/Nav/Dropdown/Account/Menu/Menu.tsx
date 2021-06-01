@@ -64,7 +64,7 @@ interface IProps {
 const Menu:FC<IProps> = ({onClick, user}) => {
     
     const profile = AccountRoutes.routes.find((route) => route.name==="Profile");
-    const profilePath = `${profile.path}/${user?.id}`;
+    const profilePath = `${profile.path}`;
     const settings = AccountRoutes.routes.find((route) => route.name==="Settings");
     const privacy = AccountRoutes.routes.find((route) => route.name==="Privacy");
     let key = 0;
