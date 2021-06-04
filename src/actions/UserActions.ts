@@ -1,8 +1,6 @@
-import { useStore } from "react-redux";
-import { AnyAction, Dispatch } from "redux";
 import { IStore } from "../reducers/rootReducer";
 import { IUserState } from "../reducers/userReducer";
-import { IUser } from "../Utils/IRestObjects";
+import { IUser, IUserAdditionalInformation } from "../Utils/IRestObjects";
 import RestService from "../utils/RestService"
 
 export enum UserActionsEnum {
@@ -14,17 +12,19 @@ export enum UserActionsEnum {
     'LOGINLOADING' = 'RESET_LOGIN_LOADING',
     'USERLOADING' = 'RESET_USER_LOADING',
     'ERROR' = 'RESET_ERROR',
-
+    'SETUSERSINF' = 'SET_USERS_INFORMATION'
 }
 
 export const fetchUser = (id:number) => async(dispatch:any, getState:() => IStore) => {
     let error = null;
     let users:IUser[] = [...getState().userState.users];
+    let usersInformation:IUserAdditionalInformation[] = [...getState().userState.usersInformation]
     dispatch({
         type: UserActionsEnum.GET,
         users: users,
+        usersInformation: usersInformation,
         error: error,
-        userLoading: true
+        userLoading: true,
     })
     let user = users.find(user => user.id === id);
     if(!user) {
@@ -32,6 +32,7 @@ export const fetchUser = (id:number) => async(dispatch:any, getState:() => IStor
         if(Object.keys(user).length > 1) {
             user.photo = await RestService.getPhoto(user.id);
             users.push(user);
+            usersInformation.push(RestService.getUserInformation(user.id));
         } else {
             user = null;
             error = 'There is no such user with given id';
@@ -39,6 +40,7 @@ export const fetchUser = (id:number) => async(dispatch:any, getState:() => IStor
         dispatch({
             type: UserActionsEnum.GET,
             users: users,
+            usersInformation: usersInformation,
             error: error,
             userLoading: false
         });
@@ -52,7 +54,11 @@ export const fetchUser = (id:number) => async(dispatch:any, getState:() => IStor
 
 export const getLoggedUser = (userState:IUserState) => {
     return userState.users.find(user => user.id === userState.loggedUserId);
-} 
+}
+
+export const getLoggedUserInformation = (userState:IUserState) => {
+    return userState.usersInformation.find(userInf => userInf.userId === userState.loggedUserId);
+}
 
 export const loginUser = (id: number) => async(dispatch:any, getState:() => IStore) => {
     dispatch({
@@ -82,6 +88,14 @@ export const updateUser = (user:IUser) => (dispatch:any, getState: () => IStore)
     dispatch({
         type: UserActionsEnum.SETUSERS,
         users: users
+    })
+}
+
+export const updateUserInformation = (userInformation:IUserAdditionalInformation) => (dispatch:any, getState:() => IStore) => {
+    const usersInformation = getState().userState.usersInformation.map(oldInf => oldInf.userId === userInformation.userId ? userInformation : oldInf);
+    dispatch({
+        type: UserActionsEnum.SETUSERSINF,
+        usersInformation: usersInformation
     })
 }
 

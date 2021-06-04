@@ -34,3 +34,50 @@ export interface IUser {
     company: ICompany,
     photo: IPhoto
 }
+
+export interface IUserAdditionalInformation {
+    userId: number;
+    expertise: IUserExpertise,
+    panelInformation: {
+        hourlyFee: string;
+        terms: {
+            text: string;
+            attachment: string;
+        }
+
+    };
+    proposals: Proposal[];
+    reviews: Review[];
+    fees: Fee[];
+}
+
+export interface IUserExpertise {
+    expertise: string[];
+    specialties: string[];
+    admissions: string[];
+    counties: string[];
+}
+
+export interface Proposal {
+    name: string;
+    entity: string;
+    location: string;
+    expertise: string;
+    date: Date;
+    firm: string;
+}
+
+export interface Review {
+    name: string;
+    entity: string;
+    location: string;
+    expertise: string;
+    date: Date;
+}
+
+export interface Fee {
+    year: Date;
+    costCenter: string;
+    amount: number;
+    lawFirm: string;
+}

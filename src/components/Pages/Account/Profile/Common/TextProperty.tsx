@@ -41,30 +41,28 @@ interface IProps {
     linkPrefix?: string;
     name: string;
     bold?: boolean;
-    onChange?: (val: string) => void;
+    onChange?: (val: string, id?:number) => void;
+    id?: number;
+    valid: boolean;
 }
 
-const TextProperty:FC<IProps> = ({editable, bold = false, name, value, onChange, type = "text", linkPrefix}) => {
-    const [state, setstate] = useState({
-        valid: value !== "",
-        value: value
-    })
+const TextProperty:FC<IProps> = ({editable, bold = false, name, valid, value, onChange, id=0, type = "text", linkPrefix}) => {
+    
 
     const inputOnChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         const val = e.currentTarget.value;
         const valid = val !== "";
-        setstate({valid: valid, value: val});
-        onChange(val.trim());
+        onChange(val, id);
     }
 
     return editable ? (
-        <InputStyled bold={bold} type={type} value={state.value} placeholder={name} onChange={inputOnChange} 
-            valid={state.valid} required/>
+        <InputStyled bold={bold} type={type} value={value} placeholder={name} onChange={inputOnChange} 
+            valid={valid} required/>
     ) : (
         linkPrefix === undefined ? (
-            <SpanStyled bold={bold}>{state.value}</SpanStyled> 
+            <SpanStyled bold={bold}>{value}</SpanStyled> 
         ) : (
-            <LinkStyled bold={bold} href={`${linkPrefix}${value}`}>{state.value}</LinkStyled>
+            <LinkStyled bold={bold} href={`${linkPrefix}${value}`}>{value}</LinkStyled>
 
         )
     );

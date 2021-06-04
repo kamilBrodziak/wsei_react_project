@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import { updateUser } from '../../../../../../actions/UserActions';
 import { IStore } from '../../../../../../reducers/rootReducer';
 import Breakpoints from '../../../../../../styledHelpers/Breakpoints';
+import Colors from '../../../../../../styledHelpers/Colors';
 import { IUser } from '../../../../../../Utils/IRestObjects';
 import { deepClone } from '../../../../../../utils/Utils';
 import Loading from '../../../../../Common/Animations/Loading';
@@ -17,8 +18,9 @@ import RightPanel from './RightPanel/RightPanel';
 const GeneralPanelCss = css`
     display: flex;
     flex-direction: column;
-    padding: 10px;
     font-size: 1.8rem;
+    margin: 0 0 20px 0;
+    border-bottom: 1px solid ${Colors.lightGray};
     @media ${Breakpoints.tablet} {
         flex-direction: row;
     }
@@ -86,7 +88,8 @@ const GeneralPanel:FC<IProps> = ({user, updateUser, editable = false}) => {
                 <RightPanel user={userState} editingState={editingState}
                     handleOnChange={(obj: object, valid: boolean) => handleOnChange(obj, valid, "right")} />
             </InformationStyled>
-            {editable && <SaveButton editingState={updatingState} validState={validMiddleState && validRightState}
+            {editable && <SaveButton editingState={editingState} validState={validMiddleState && validRightState}
+                updatingState={updatingState}
                  handleSave={handleSave} />}
         </GeneralPanelStyled>
     )

@@ -49,8 +49,8 @@ const MiddlePanel:FC<IProps> = ({user, handleOnChange, editingState}) => {
     return (
         <MiddlePanelStyled>
             {
-                childs.map(({name, value, onChange, ...other}, i) => 
-                    <TextProperty key={i} value={value} name={name} {...other}
+                childs.map(({name, valid, value, onChange, ...other}, i) => 
+                    <TextProperty key={i} value={value} name={name} valid={valid} {...other}
                         editable={editingState} onChange={(val:string) => onChange(val, i)}/>
                 )
             }

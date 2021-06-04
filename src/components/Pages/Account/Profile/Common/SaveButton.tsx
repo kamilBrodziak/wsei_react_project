@@ -5,20 +5,21 @@ import Button from '../../../../Common/Buttons/Button';
 
 const SaveButtonStyled = styled(Button)`
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 0;
+    right: 0;
 `
 
 interface IProps {
     handleSave: () => void;
     editingState: boolean;
     validState: boolean;
+    updatingState: boolean;
 }
 
-const SaveButton:FC<IProps> = ({handleSave, editingState, validState}) => {
+const SaveButton:FC<IProps> = ({handleSave, editingState, validState, updatingState}) => {
     return (
             <SaveButtonStyled width="30px" height="30px" onClick={handleSave} disabled={!validState}>
-                { editingState && 
+                { updatingState && 
                     <Loading width="100%" height="100%" />
                 }
             </SaveButtonStyled>
