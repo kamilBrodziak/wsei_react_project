@@ -6,6 +6,14 @@ const GlobalStyle = createGlobalStyle`
         font-size: 10px;
     }
     
+    a {
+        color: black;
+        text-decoration: none;
+        &:visited {
+            color: inherit;
+        }
+    }
+
     body {
         background: #f5f7f9;
         font-size: 1.6rem;

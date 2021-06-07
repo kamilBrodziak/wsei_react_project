@@ -38,17 +38,26 @@ export interface IUser {
 export interface IUserAdditionalInformation {
     userId: number;
     expertise: IUserExpertise,
-    panelInformation: {
-        hourlyFee: string;
-        terms: {
-            text: string;
-            attachment: string;
-        }
-
-    };
+    panelInformation: IUserPanelInformation
     proposals: Proposal[];
     reviews: Review[];
     fees: Fee[];
+}
+
+export interface IUserPanelInformation {
+    fee: string;
+    terms: IUserPanelInformationTerms;
+    correspondants: number[]
+}
+
+export interface IUserPanelInformationTerms {
+    text: string;
+    attachment: IAttachment;
+}
+
+export interface IAttachment {
+    name: string;
+    path: string;
 }
 
 export interface IUserExpertise {

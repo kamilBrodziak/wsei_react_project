@@ -21,12 +21,15 @@ class RestService {
                 counties: ["Tunisia"]
             },
             panelInformation: {
-                hourlyFee: "610€/hour (Negociated)",
+                fee: "610€/hour (Negociated)",
                 terms: {
                     text: "Monthly 10k€ retainer - see with Jeanny Smith",
-                    attachment: ""
-                }
-
+                    attachment: {
+                        path: "",
+                        name: "Attachment_lorem_ipsum25425.jpg"
+                    }
+                },
+                correspondants: [1,2,3]
             },
             proposals: [],
             reviews: [],

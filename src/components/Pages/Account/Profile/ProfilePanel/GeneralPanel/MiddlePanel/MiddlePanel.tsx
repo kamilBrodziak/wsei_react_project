@@ -1,13 +1,42 @@
 import React, { FC } from 'react'
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import Colors from '../../../../../../../styledHelpers/Colors';
 import { IUser } from '../../../../../../../Utils/IRestObjects';
-import TextProperty from '../../../Common/TextProperty';
 
 const MiddlePanelStyled = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 `
+
+const commonCss = css<IInputProps>`
+    font-weight: ${props => props.bold ? "bold" : "normal"};
+    font-size: 1.8rem;
+`
+
+const InputStyled = styled.input<IInputProps>`
+    ${commonCss}
+    width: 100%;
+    padding: 1px 3px;
+    margin: 2px 0;
+    outline: 0;
+    border: 2px solid ${props => props.valid ? Colors.lightGray : "red"};
+    &:focus {
+        border: 2px solid black;
+    }
+    border-radius: 5px;
+    font-size: 1.8rem;
+`
+
+const SpanStyled = styled.span<IInputProps>`
+    ${commonCss}
+    padding: 5px 0;
+`
+
+interface IInputProps {
+    valid?: boolean;
+    bold?: boolean;
+}
 
 interface IProps {
     user: IUser;
@@ -33,13 +62,11 @@ const MiddlePanel:FC<IProps> = ({user, handleOnChange, editingState}) => {
             onChange: (val:string, childId:number) => handleChange({address: {...user.address, city: val}}, val !== "", childId),
             value: user.address.city,
             valid: user.address.city !== "",
-            bold: false
         }, {
             name: 'Website',
             onChange: (val:string, childId:number) => handleChange({website: val}, val !== "", childId),
             value: user.website,
             valid: user.website !== "",
-            bold: false
         }
     ]
     const handleChange = (updatedProperty:object, valid:boolean, childId: number) => {
@@ -49,9 +76,12 @@ const MiddlePanel:FC<IProps> = ({user, handleOnChange, editingState}) => {
     return (
         <MiddlePanelStyled>
             {
-                childs.map(({name, valid, value, onChange, ...other}, i) => 
-                    <TextProperty key={i} value={value} name={name} valid={valid} {...other}
-                        editable={editingState} onChange={(val:string) => onChange(val, i)}/>
+                childs.map(({name, onChange, value, bold=false, ...other}, i) => 
+                    { return editingState ?
+                        <InputStyled key={i} placeholder={name} value={value} bold={bold}
+                            onChange={(e) => onChange(e.currentTarget.value, i)} {...other} /> :
+                        <SpanStyled key={i} bold={bold}>{value}</SpanStyled>
+                    }
                 )
             }
         </MiddlePanelStyled>

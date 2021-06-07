@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { IUser, IUserAdditionalInformation } from '../../../../../Utils/IRestObjects';
 import Loading from '../../../../Common/Animations/Loading';
 import GeneralPanel from './GeneralPanel/GeneralPanel';
-import InformationPanel from './InformationPanel/InformationPanel';
+import DetailedPanel from './DetailedPanel/DetailedPanel';
 
 const ProfileStyled = styled.section`
     background: white;
@@ -20,7 +20,7 @@ const ProfilePanel:FC<IProps> = ({user, editable, userInformation}) => {
     return (
         <ProfileStyled>
             <GeneralPanel user={user} editable={editable}/>
-            <InformationPanel userInformation={userInformation} editable={editable} />
+            <DetailedPanel userInformation={userInformation} editable={editable} />
         </ProfileStyled>
     )
 }

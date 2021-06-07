@@ -3,16 +3,22 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { updateUserInformation } from '../../../../../../actions/UserActions';
 import { IStore } from '../../../../../../reducers/rootReducer';
-import { IUserAdditionalInformation, IUserExpertise } from '../../../../../../Utils/IRestObjects';
+import { IUserAdditionalInformation, IUserExpertise, IUserPanelInformation } from '../../../../../../Utils/IRestObjects';
 import { deepClone } from '../../../../../../utils/Utils';
 import SaveButton from '../../Common/SaveButton';
 import Expertise from './Expertise/Expertise';
+import Informations from './Informations/Informations';
+import InternalCorrespondants from './Informations/InternalCorrespondants/InternalCorrespondants';
+import ServicesAndProjects from './Informations/ServicesAndProjects/ServicesAndProjects';
 
 
 const InformationPanelStyled = styled.div`
     position: relative;
 `
 
+const SaveButtonStyled = styled(SaveButton)`
+    top: 20px;
+` 
 
 interface IProps {
     userInformation: IUserAdditionalInformation;
@@ -24,8 +30,9 @@ const InformationPanel:FC<IProps> = ({userInformation, editable, updateInformati
     const [updatingState, setUpdatingState] = useState(false);
     const [editingState, setEditingState] = useState(false);
     const [expertiseState, setExpertiseState] = useState(userInformation.expertise);
-    
-    const filterExpertise = (values:string[]) => values.map(item => item.trim()).filter(item => item.length > 0)
+    const [informationState, setInformationState] = useState(userInformation.panelInformation);
+    const filterExpertise = (values:string[]) => values.map(item => item.replace(/&nbsp;/g, ' ')
+        .trim().replace(/  +/g, ' ')).filter(item => item.length > 0)
     
     const handleSave = () => {
         if(editingState) {
@@ -47,13 +54,22 @@ const InformationPanel:FC<IProps> = ({userInformation, editable, updateInformati
     }
     const handleExpertiseOnChange = (expertise: IUserExpertise) => {
         setExpertiseState(expertise);
-        
     }
+
+    const handleInformationOnChange = (information: IUserPanelInformation) => {
+        setInformationState(information);
+    }
+
     return (
         <InformationPanelStyled>
             <Expertise expertise={expertiseState} editingState={editingState} parentHandleOnChange={handleExpertiseOnChange} />
-            <SaveButton editingState={editingState} validState={true} handleSave={handleSave} 
-                updatingState={updatingState}/>
+            <Informations editingState={editingState} information={informationState}
+                parentHandleOnChange={handleInformationOnChange} />
+            
+            { editable && 
+                <SaveButtonStyled editingState={editingState} validState={true} handleSave={handleSave} 
+                    updatingState={updatingState}/>
+            }
         </InformationPanelStyled>
     )
 }

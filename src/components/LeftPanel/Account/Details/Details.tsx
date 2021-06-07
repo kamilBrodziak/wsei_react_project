@@ -17,7 +17,7 @@ const ProfileImgStyled = styled(Icon)`
 
 const DetailsSpanStyled = styled.span`
     font-size: 1.4rem;
-    color: ${Colors.lightGray};
+    color: ${Colors.gray};
 `;
 
 const DetailsStyled = styled.div`
@@ -33,9 +33,9 @@ const LinkStyled = styled(Link)`
     font-size: 1.7rem;
     text-decoration: none;
     margin: 5px 0 10px 0;
-    color: ${Colors.link};
-    &:hover {
-        color: ${Colors.link};
+    color: ${Colors.linkDark};
+    &:visited {
+        color: ${Colors.linkDark};
     }
 `;
 

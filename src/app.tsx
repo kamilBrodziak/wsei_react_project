@@ -13,6 +13,7 @@ import { AnyAction } from "redux";
 import { loginUser, UserActionsEnum } from "./actions/UserActions";
 import { connect } from "react-redux";
 import { IRootState } from "./reducers/rootReducer";
+import Breakpoints from "./styledHelpers/Breakpoints";
 
 
 
@@ -27,12 +28,22 @@ const SiteContainer = styled.div`
 
 const MainContainer = styled.section`
     display: flex;
-    padding: 20px 30px;
+    flex-direction: column-reverse;
+    align-items: center;
+    @media ${Breakpoints.tablet} {
+        flex-direction: row;
+        padding: 20px 30px;
+        align-items: flex-start;
+    }
 `;
 
 const ContentContainer = styled.section`
-    margin: 0 40px;
+    margin: 10px 20px;
     flex: 1;
+    min-width: 0;
+    @media ${Breakpoints.tablet} {
+        margin: 0 40px;
+    }
 `;
 
 

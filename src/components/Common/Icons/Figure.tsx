@@ -5,6 +5,7 @@ import {FlexCentered} from '../../../styledHelpers/Positioning';
 const FigureComponent = styled.figure<IProps>`
     width: ${props => props.width};
     height: ${props => props.height};
+    overflow: hidden;
     ${FlexCentered}
 `;
 

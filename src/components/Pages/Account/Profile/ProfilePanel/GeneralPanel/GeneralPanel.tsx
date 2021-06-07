@@ -20,7 +20,6 @@ const GeneralPanelCss = css`
     flex-direction: column;
     font-size: 1.8rem;
     margin: 0 0 20px 0;
-    border-bottom: 1px solid ${Colors.lightGray};
     @media ${Breakpoints.tablet} {
         flex-direction: row;
     }

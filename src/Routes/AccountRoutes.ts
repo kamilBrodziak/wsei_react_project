@@ -4,38 +4,47 @@ import LogoutIcon from "../assets/icons/logout.svg";
 import { IAppRoutes } from "./IRoutes";
 import HomeIcon from "../assets/icons/house.svg";
 
+export enum AccountPaths {
+    PROFILE = '/profile',
+    PRIVACY = '/privacy',
+    SETTINGS = '/settings',
+    LOGOUT = '/logout',
+    LOGIN = '/login',
+    REGISTER = '/register'
+}
+
 const AccountRoutes: IAppRoutes = {
     label: "Account",
     routes: [
         {
             name: 'Profile',
-            path: '/profile',
+            path: AccountPaths.PROFILE,
             exact: true,
             icon: HomeIcon
         },
         {
             name: 'Privacy',
-            path: '/privacy',
+            path: AccountPaths.PRIVACY,
             icon: PrivacyIcon
         },
         {
             name: 'Settings',
-            path: '/settings',
+            path: AccountPaths.SETTINGS,
             icon: SettingsIcon
         },
         {
             name: "Logout",
-            path: '/logout',
+            path: AccountPaths.LOGOUT,
             icon: LogoutIcon
         },
         {
             name: "Login",
-            path: '/login',
+            path: AccountPaths.LOGIN,
             icon: LogoutIcon
         },
         {
             name: "Register",
-            path: '/register',
+            path: AccountPaths.REGISTER,
             icon: LogoutIcon
         }
         

@@ -1,11 +1,10 @@
 import React, { FC, InputHTMLAttributes, useState } from 'react'
 import styled, { css } from 'styled-components';
-import { IStore } from '../../../../../reducers/rootReducer';
 import Colors from '../../../../../styledHelpers/Colors';
 
 const InputGeneralCss = css<IInputProps>`
     padding: 5px;
-    width: auto;
+    width: 100%;
     margin: 5px;
     font-weight: ${props => props.bold ? "bold" : "normal"};
 
@@ -24,7 +23,12 @@ const SpanStyled = styled.span<IInputProps>`
 `
 
 const LinkStyled = styled.a`
+    text-decoration: none;
+    color: black;
     ${InputGeneralCss}
+    &:visited {
+        color: black;
+    }
 `
 
 // type TextPropertyOnChange = (event:React.ChangeEvent<HTMLInputElement>, name:string) => void;
@@ -43,10 +47,11 @@ interface IProps {
     bold?: boolean;
     onChange?: (val: string, id?:number) => void;
     id?: number;
-    valid: boolean;
+    valid?: boolean;
+    className?: string;
 }
 
-const TextProperty:FC<IProps> = ({editable, bold = false, name, valid, value, onChange, id=0, type = "text", linkPrefix}) => {
+const TextProperty:FC<IProps> = ({editable, className, bold = false, name, valid, value, onChange, id=0, type = "text", linkPrefix}) => {
     
 
     const inputOnChange = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -56,13 +61,13 @@ const TextProperty:FC<IProps> = ({editable, bold = false, name, valid, value, on
     }
 
     return editable ? (
-        <InputStyled bold={bold} type={type} value={value} placeholder={name} onChange={inputOnChange} 
+        <InputStyled className={className} bold={bold} type={type} value={value} placeholder={name} onChange={inputOnChange} 
             valid={valid} required/>
     ) : (
         linkPrefix === undefined ? (
-            <SpanStyled bold={bold}>{value}</SpanStyled> 
+            <SpanStyled className={className} bold={bold}>{value}</SpanStyled> 
         ) : (
-            <LinkStyled bold={bold} href={`${linkPrefix}${value}`}>{value}</LinkStyled>
+            <LinkStyled className={className} bold={bold} href={`${linkPrefix}${value}`}>{value}</LinkStyled>
 
         )
     );

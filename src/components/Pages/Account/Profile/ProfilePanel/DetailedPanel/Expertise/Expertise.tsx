@@ -1,11 +1,15 @@
 import React, { FC, useState } from 'react'
 import styled from 'styled-components';
 import { IUserExpertise } from '../../../../../../../Utils/IRestObjects';
-import { deepClone } from '../../../../../../../utils/Utils';
+import Panel from '../../../Common/Panel';
 import Item from './Items/Item';
 
 const ExpertiseStyled = styled.ul`
     list-style: none;
+`
+
+const PanelStyled = styled(Panel)`
+    padding: 20px 0 0 0;
 `
 
 interface IProps {
@@ -35,16 +39,18 @@ const Expertise:FC<IProps> = ({expertise, editingState, parentHandleOnChange}) =
     }
     
     return (
-        <ExpertiseStyled>
-            <Item key={0} header={"Expertise"} items={expertise.expertise} editing={editingState} 
-                parentHandleOnChange={(items:string[]) => handleOnChange(0, items)} />
-            <Item key={1} header={"Specialties"} items={expertise.specialties} editing={editingState} 
-                parentHandleOnChange={(items:string[]) => handleOnChange(1, items)} />
-            <Item key={2} header={"Admission to practice law"} items={expertise.admissions} editing={editingState} 
-                parentHandleOnChange={(items:string[]) => handleOnChange(2, items)} />
-            <Item key={3} header={"Counties"} items={expertise.counties} editing={editingState} 
-                parentHandleOnChange={(items:string[]) => handleOnChange(3, items)} />
-        </ExpertiseStyled>
+        <PanelStyled>
+            <ExpertiseStyled>
+                <Item key={0} header={"Expertise"} items={expertise.expertise} editingState={editingState} 
+                    parentHandleOnChange={(items:string[]) => handleOnChange(0, items)} />
+                <Item key={1} header={"Specialties"} items={expertise.specialties} editingState={editingState} 
+                    parentHandleOnChange={(items:string[]) => handleOnChange(1, items)} />
+                <Item key={2} header={"Admission to practice law"} items={expertise.admissions} editingState={editingState} 
+                    parentHandleOnChange={(items:string[]) => handleOnChange(2, items)} />
+                <Item key={3} header={"Counties"} items={expertise.counties} editingState={editingState} 
+                    parentHandleOnChange={(items:string[]) => handleOnChange(3, items)} />
+            </ExpertiseStyled>
+        </PanelStyled>
     )
 }
 

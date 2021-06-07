@@ -13,7 +13,7 @@ const DropdownStyled = styled.div<IStyledProps>`
     box-shadow: 0 6px 6px 1px gray;
     top: 100%;
     max-height: calc(100vh - ${({headerHeight}) => headerHeight}px);
-    left:0;
+    left: -10px;
     width: 100vw;
     z-index: 999;
     color: #707070;
@@ -22,6 +22,7 @@ const DropdownStyled = styled.div<IStyledProps>`
     flex-direction: column;
 
     @media ${Breakpoints.tablet} {
+        left: 0;
         width: 250px;
         max-height: 600px;
     }

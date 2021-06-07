@@ -16,6 +16,7 @@ const HeaderStyled = styled.header`
     top: 0;
     left: 0;
     background: white;
+    z-index: 1000;
 `;
 
 const HeaderContainer = styled.div`

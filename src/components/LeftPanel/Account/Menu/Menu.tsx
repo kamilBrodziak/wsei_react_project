@@ -40,7 +40,7 @@ const LinkStyled = styled(Link)`
     font-size: 1.7rem;
     color: black;
     text-decoration: none;
-    &::visited {
+    &:visited {
         color: black;
     }
 `

@@ -1,9 +1,10 @@
 const Colors = {
-    link: "blue",
-    linkVisited: `blue`,
+    link: "#6EAABA",
+    linkDark: "#374ba3",
+    linkVisited: `#6EAABA`,
     darkGray: `#3e3e3e`,
     gray: "gray",
-    lightGray: "lightgray"
+    lightGray: "#eaeaea"
 }
 
 export default Colors;

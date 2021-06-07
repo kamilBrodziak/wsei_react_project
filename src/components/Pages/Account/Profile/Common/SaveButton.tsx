@@ -9,16 +9,16 @@ const SaveButtonStyled = styled(Button)`
     right: 0;
 `
 
-interface IProps {
+interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     handleSave: () => void;
     editingState: boolean;
     validState: boolean;
     updatingState: boolean;
 }
 
-const SaveButton:FC<IProps> = ({handleSave, editingState, validState, updatingState}) => {
+const SaveButton:FC<IProps> = ({className, handleSave, editingState, validState, updatingState}) => {
     return (
-            <SaveButtonStyled width="30px" height="30px" onClick={handleSave} disabled={!validState}>
+            <SaveButtonStyled className={className} width="30px" height="30px" onClick={handleSave} disabled={!validState}>
                 { updatingState && 
                     <Loading width="100%" height="100%" />
                 }

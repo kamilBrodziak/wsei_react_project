@@ -11,7 +11,6 @@ import Link from '../../../Common/Links/Link';
 
 const LoginLinkStyled = styled(Link)`
     width: 150px;
-    color: black;
     cursor: pointer;
     ${FlexCentered}
     text-decoration: none;
@@ -26,6 +25,7 @@ const SpanStyled = styled.span`
     padding: 0 0 0 20px;
     font-size: 1.7rem;
     flex: 1;
+    color: black;
 `
 
 const FigureStyled = styled(Figure)`

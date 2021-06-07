@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { connect } from 'react-redux';
 import { useHistory, useRouteMatch } from 'react-router';
 import styled from 'styled-components';
-import { fetchUser, getLoggedUser, getLoggedUserInformation } from '../../../../actions/UserActions';
+import { fetchUserAction, getLoggedUser, getLoggedUserInformation } from '../../../../actions/UserActions';
 import { IStore } from '../../../../reducers/rootReducer';
 import AccountRoutes from '../../../../routes/AccountRoutes';
 import { IUser, IUserAdditionalInformation } from '../../../../Utils/IRestObjects';

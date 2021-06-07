@@ -15,12 +15,12 @@ const LinkStyled = styled(Link)`
     ${FlexCentered}
     padding: 5px 0;
     flex-direction: row;
-    color: black;
     text-decoration: none;
 `
 
 const TextStyled = styled.span`
     flex: 1;
+    color: black;
     font-size: 2rem;
     padding: 0 0 0 5px;
 `;

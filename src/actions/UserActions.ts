@@ -15,8 +15,61 @@ export enum UserActionsEnum {
     'SETUSERSINF' = 'SET_USERS_INFORMATION'
 }
 
-export const fetchUser = (id:number) => async(dispatch:any, getState:() => IStore) => {
-    let error = null;
+// HELPERS:
+export const getLoggedUser = (userState:IUserState) => {
+    return userState.users.find(user => user.id === userState.loggedUserId);
+}
+
+export const getUser = (users:IUser[], id: number) => {
+    return users.find(user => user.id === id);
+}
+
+export const getLoggedUserInformation = (userState:IUserState) => {
+    return userState.usersInformation.find(userInf => userInf.userId === userState.loggedUserId);
+}
+
+export const getUsers = (ids: number[]) => async(dispatch:any, getState:() => IStore) => {
+    await fetchMissingUsersAction(ids)(dispatch, getState);
+    const users = getState().userState.users;
+    return ids.map(id => getUser(users, id)); 
+}
+
+
+const fetchUser = async(id:number) => {
+    const returnObj:{user:IUser, userInformation:IUserAdditionalInformation} = {
+        user: null,
+        userInformation: null
+    }
+    let user = await RestService.getUser(id);
+    if(Object.keys(user).length > 1) {
+        user.photo = await RestService.getPhoto(user.id);
+        returnObj.user = user;
+        returnObj.userInformation = RestService.getUserInformation(id)
+    }
+    return returnObj;
+}
+
+// Actions
+
+export const fetchUserAction = (id:number) => async(dispatch:any, getState:() => IStore) => {
+    await fetchUsersAction([id])(dispatch, getState);
+}
+
+export const fetchMissingUsersAction = (ids:number[]) => async(dispatch:any, getState:() => IStore) => {
+    const idsNotFound = [];
+    for (const id of ids) {
+        const user = getUser(getState().userState.users, id)
+        if(!user) {
+            idsNotFound.push(id);
+        }
+    }
+    if(idsNotFound.length) {
+        await fetchUsersAction(idsNotFound)(dispatch,getState);
+    }
+}
+
+export const fetchUsersAction = (ids:number[]) => async(dispatch:any, getState:() => IStore) => {
+    let error = '';
     let users:IUser[] = [...getState().userState.users];
     let usersInformation:IUserAdditionalInformation[] = [...getState().userState.usersInformation]
     dispatch({
@@ -26,38 +79,26 @@ export const fetchUser = (id:number) => async(dispatch:any, getState:() => IStor
         error: error,
         userLoading: true,
     })
-    let user = users.find(user => user.id === id);
-    if(!user) {
-        user = await RestService.getUser(id);
-        if(Object.keys(user).length > 1) {
-            user.photo = await RestService.getPhoto(user.id);
-            users.push(user);
-            usersInformation.push(RestService.getUserInformation(user.id));
-        } else {
-            user = null;
-            error = 'There is no such user with given id';
+    for(let i = 0; i < ids.length; ++i) {
+        let id = ids[i];
+        let user = getUser(users, id);
+        if(!user) {
+            const returnObj = await fetchUser(id);
+            if(returnObj.user) {
+                users.push(returnObj.user);
+                usersInformation.push(returnObj.userInformation);
+            } else {
+                error += 'There is no such user with given id';
+            }
         }
-        dispatch({
-            type: UserActionsEnum.GET,
-            users: users,
-            usersInformation: usersInformation,
-            error: error,
-            userLoading: false
-        });
-    } else {
-        dispatch({
-            type: UserActionsEnum.USERLOADING,
-            userLoading: false
-        })
     }
-}
-
-export const getLoggedUser = (userState:IUserState) => {
-    return userState.users.find(user => user.id === userState.loggedUserId);
-}
-
-export const getLoggedUserInformation = (userState:IUserState) => {
-    return userState.usersInformation.find(userInf => userInf.userId === userState.loggedUserId);
+    dispatch({
+        type: UserActionsEnum.GET,
+        users: users,
+        usersInformation: usersInformation,
+        error: error !== "" ? error : null,
+        userLoading: false
+    });
 }
 
 export const loginUser = (id: number) => async(dispatch:any, getState:() => IStore) => {
@@ -66,9 +107,8 @@ export const loginUser = (id: number) => async(dispatch:any, getState:() => ISto
         loggedUserId: null,
         loginLoading: true
     });
-    await fetchUser(id)(dispatch, getState);
-    const users:IUser[] = getState().userState.users;
-    const user = users.find(user => user.id === id);
+    await fetchUserAction(id)(dispatch, getState);
+    const user = getUser(getState().userState.users, id);
     dispatch({
         type: UserActionsEnum.LOGIN,
         loggedUserId: user?.id,

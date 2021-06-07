@@ -1,8 +1,6 @@
 import { FC } from 'react'
 import styled from 'styled-components';
-import AccountRoutes from '../../../../../../../routes/AccountRoutes';
 import PlatformRoutes from '../../../../../../../routes/PlatformRoutes';
-import WorkspacesRoutes from '../../../../../../../routes/WorkspacesRoutes';
 import { FlexCentered } from '../../../../../../../styledHelpers/Positioning';
 import { IPhoto } from '../../../../../../../Utils/IRestObjects';
 import Figure from '../../../../../../Common/Icons/Figure';
