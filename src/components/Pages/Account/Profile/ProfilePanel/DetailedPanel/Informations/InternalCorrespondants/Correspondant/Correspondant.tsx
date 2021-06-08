@@ -32,7 +32,9 @@ const UserNameFigureStyled = styled(Figure)`
     border-radius: 50%;
     margin: 0 10px 0 0;
 `
-
+const LinkStyled = styled(ProfileLink)`
+    color: black;
+`
 
 interface IProps {
     user: IUser;
@@ -46,7 +48,7 @@ const Correspondant:FC<IProps> = ({user}) => {
             </UserNameFigureStyled>
             <UserNameStyled>{user.name}</UserNameStyled>
             <MessageButton text="Message" />
-            <ProfileLink text="Profile" userId={user.id} includeDefaultIcon={true} />
+            <LinkStyled text="Profile" userId={user.id} includeDefaultIcon={true} />
         </UsersListItem>
     )
 }

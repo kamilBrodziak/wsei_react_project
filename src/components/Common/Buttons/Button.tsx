@@ -7,20 +7,23 @@ const ButtonStyled = styled.button<IProps>`
     height: ${props => props.height};
     cursor: pointer;
     position: relative;
+    outline: none;
+    border: none;
+    font: inherit;
     ${FlexCentered}
 `;
 
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement>{
     width: string;
     height: string;
+    className?: string;
 }
 
 
-const Button : FC<IProps> = (props) => {
-    const {...other} = props;
+const Button : FC<IProps> = ({children, ...other}) => {
     return (
         <ButtonStyled {...other}>
-            {props.children}
+            {children}
         </ButtonStyled>
     );
 }

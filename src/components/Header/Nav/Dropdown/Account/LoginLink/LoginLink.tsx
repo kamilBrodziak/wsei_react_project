@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { logoutUser } from '../../../../../../actions/UserActions';
+import { logoutUserAction } from '../../../../../../actions/UserActions';
 import { IStore } from '../../../../../../reducers/rootReducer';
 import AccountRoutes from '../../../../../../routes/AccountRoutes';
 import { FlexCentered } from '../../../../../../styledHelpers/Positioning';

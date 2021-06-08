@@ -39,9 +39,6 @@ export interface IUserAdditionalInformation {
     userId: number;
     expertise: IUserExpertise,
     panelInformation: IUserPanelInformation
-    proposals: Proposal[];
-    reviews: Review[];
-    fees: Fee[];
 }
 
 export interface IUserPanelInformation {
@@ -67,7 +64,7 @@ export interface IUserExpertise {
     counties: string[];
 }
 
-export interface Proposal {
+export interface IProposal {
     name: string;
     entity: string;
     location: string;
@@ -76,7 +73,7 @@ export interface Proposal {
     firm: string;
 }
 
-export interface Review {
+export interface IReview {
     name: string;
     entity: string;
     location: string;
@@ -84,7 +81,7 @@ export interface Review {
     date: Date;
 }
 
-export interface Fee {
+export interface IFee {
     year: Date;
     costCenter: string;
     amount: number;

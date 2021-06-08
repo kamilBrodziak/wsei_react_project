@@ -23,14 +23,15 @@ interface IProps {
     includeDefaultIcon?: boolean;
     isLoggedUser?: boolean;
     text: string;
+    className?: string;
 }
 
-const ProfileLink:FC<IProps> = ({userId, photo, includeDefaultIcon = false, isLoggedUser=false, text}) => {
+const ProfileLink:FC<IProps> = ({className, userId, photo, includeDefaultIcon = false, isLoggedUser=false, text}) => {
     const link = isLoggedUser ?  `${AccountPaths.PROFILE}` : `${AccountPaths.PROFILE}/${userId}`
     const src = photo ? photo.url : (includeDefaultIcon ? DefaultIcon : null);
     const alt = photo ? photo.title : "Profile icon";
     return (
-        <ProfileLinkStyled to={link}>
+        <ProfileLinkStyled to={link} className={className}>
             { src && 
                 <ProfileFigureStyled width="18px" height="18px">
                     <Icon src={src} alt={alt} />

@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import { connect } from 'react-redux';
 import styled, { css } from 'styled-components';
-import { updateUser } from '../../../../../../actions/UserActions';
+import { updateUserAction } from '../../../../../../actions/UserActions';
 import { IStore } from '../../../../../../reducers/rootReducer';
 import Breakpoints from '../../../../../../styledHelpers/Breakpoints';
 import Colors from '../../../../../../styledHelpers/Colors';
@@ -100,7 +100,7 @@ const mapStateToProps = (state: IStore) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        updateUser: (user: IUser) => dispatch(updateUser(user))
+        updateUser: (user: IUser) => dispatch(updateUserAction(user))
     }
 }
 

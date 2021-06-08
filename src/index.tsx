@@ -5,13 +5,13 @@ import {applyMiddleware, createStore} from 'redux';
 import { Provider } from "react-redux";
 import rootReducer from "./reducers/rootReducer";
 import thunk from "redux-thunk";
-import { loginUser } from "./actions/UserActions";
+import { loginUserAction } from "./actions/UserActions";
 
 const store = createStore(
     rootReducer,
     applyMiddleware(thunk)
 );
 
-store.dispatch((dispatch:any) => dispatch(loginUser(1)));
+store.dispatch((dispatch:any) => dispatch(loginUserAction(1)));
 
 render(<Provider store={store}><App /></Provider>, document.getElementById("root"));

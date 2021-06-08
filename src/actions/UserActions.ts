@@ -1,19 +1,11 @@
+import { Dispatch } from "react";
 import { IStore } from "../reducers/rootReducer";
 import { IUserState } from "../reducers/userReducer";
-import { IUser, IUserAdditionalInformation } from "../Utils/IRestObjects";
+import { IFee, IProposal, IReview, IUser, IUserAdditionalInformation } from "../Utils/IRestObjects";
 import RestService from "../utils/RestService"
+import { IFetchUserAction, IFetchUserFees, IFetchUserProposals, IFetchUserReviews, IFetchUserStatusAction, ISetUsersAction, ISetUsersInformationAction, IUserLoginAction, IUserLogoutAction, UserActionsEnum } from "./IUserActions";
 
-export enum UserActionsEnum {
-    'SETUSERS' = 'SET_USERS',
-    'SETUSER' = 'SET_USER',
-    'GET' = 'GET_USER',
-    'LOGOUT' = 'LOGOUT_USER',
-    'LOGIN' = 'LOGIN_USER',
-    'LOGINLOADING' = 'RESET_LOGIN_LOADING',
-    'USERLOADING' = 'RESET_USER_LOADING',
-    'ERROR' = 'RESET_ERROR',
-    'SETUSERSINF' = 'SET_USERS_INFORMATION'
-}
+
 
 // HELPERS:
 export const getLoggedUser = (userState:IUserState) => {
@@ -51,11 +43,11 @@ const fetchUser = async(id:number) => {
 
 // Actions
 
-export const fetchUserAction = (id:number) => async(dispatch:any, getState:() => IStore) => {
+export const fetchUserAction = (id:number) => async(dispatch:Dispatch<IFetchUserStatusAction | IFetchUserAction>, getState:() => IStore) => {
     await fetchUsersAction([id])(dispatch, getState);
 }
 
-export const fetchMissingUsersAction = (ids:number[]) => async(dispatch:any, getState:() => IStore) => {
+export const fetchMissingUsersAction = (ids:number[]) => async(dispatch:Dispatch<IFetchUserStatusAction | IFetchUserAction>, getState:() => IStore) => {
     const idsNotFound = [];
     for (const id of ids) {
         const user = getUser(getState().userState.users, id)
@@ -68,16 +60,15 @@ export const fetchMissingUsersAction = (ids:number[]) => async(dispatch:any, get
     }
 }
 
-export const fetchUsersAction = (ids:number[]) => async(dispatch:any, getState:() => IStore) => {
+export const fetchUsersAction = (ids:number[]) => async(dispatch:Dispatch<IFetchUserStatusAction | IFetchUserAction>, getState:() => IStore) => {
     let error = '';
     let users:IUser[] = [...getState().userState.users];
     let usersInformation:IUserAdditionalInformation[] = [...getState().userState.usersInformation]
+    
     dispatch({
-        type: UserActionsEnum.GET,
-        users: users,
-        usersInformation: usersInformation,
+        type: UserActionsEnum.USERFETCHINGSTATUS,
         error: error,
-        userLoading: true,
+        fetching: true
     })
     for(let i = 0; i < ids.length; ++i) {
         let id = ids[i];
@@ -93,15 +84,18 @@ export const fetchUsersAction = (ids:number[]) => async(dispatch:any, getState:(
         }
     }
     dispatch({
+        type: UserActionsEnum.USERFETCHINGSTATUS,
+        error: error,
+        fetching: false
+    })
+    dispatch({
         type: UserActionsEnum.GET,
         users: users,
-        usersInformation: usersInformation,
-        error: error !== "" ? error : null,
-        userLoading: false
+        usersInformation: usersInformation
     });
 }
 
-export const loginUser = (id: number) => async(dispatch:any, getState:() => IStore) => {
+export const loginUserAction = (id: number) => async(dispatch:Dispatch<IUserLoginAction | IFetchUserStatusAction | IFetchUserAction>, getState:() => IStore) => {
     dispatch({
         type: UserActionsEnum.LOGIN,
         loggedUserId: null,
@@ -116,14 +110,13 @@ export const loginUser = (id: number) => async(dispatch:any, getState:() => ISto
     });
 }
 
-export const logoutUser = () => {
+export const logoutUserAction = ():IUserLogoutAction => {
     return {
-        type: UserActionsEnum.LOGOUT,
-        loginLoading: false
+        type: UserActionsEnum.LOGOUT
     }
 }
 
-export const updateUser = (user:IUser) => (dispatch:any, getState: () => IStore) => {
+export const updateUserAction = (user:IUser) => (dispatch:Dispatch<ISetUsersAction>, getState: () => IStore) => {
     const users = getState().userState.users.map(oldUser => oldUser.id === user.id ? user : oldUser);
     dispatch({
         type: UserActionsEnum.SETUSERS,
@@ -131,17 +124,62 @@ export const updateUser = (user:IUser) => (dispatch:any, getState: () => IStore)
     })
 }
 
-export const updateUserInformation = (userInformation:IUserAdditionalInformation) => (dispatch:any, getState:() => IStore) => {
+export const updateUserInformationAction = (userInformation:IUserAdditionalInformation) => 
+    (dispatch:Dispatch<ISetUsersInformationAction>, getState:() => IStore) => {
     const usersInformation = getState().userState.usersInformation.map(oldInf => oldInf.userId === userInformation.userId ? userInformation : oldInf);
     dispatch({
         type: UserActionsEnum.SETUSERSINF,
-        usersInformation: usersInformation
+        information: usersInformation
     })
 }
 
-export const setUser = (user:IUser) => {
-    return {
-        type: UserActionsEnum.SETUSER,
-        user: user
-    }
+export const fetchUserProposalsAction = (userId: number, page: number, limit:number) => 
+    async(dispatch:Dispatch<IFetchUserProposals>, getState:() => IStore) => {
+    dispatch({
+        type: UserActionsEnum.FETCHUSERPROPOSALS,
+        proposals: [],
+        fetching: true  
+    })
+    let proposals:IProposal[] = RestService.getUserProposals(userId, page, limit);
+    setTimeout(() => {
+        dispatch({
+            type: UserActionsEnum.FETCHUSERPROPOSALS,
+            proposals: proposals,
+            fetching: false
+        })
+    }, 500)
+}
+
+export const fetchUserReviewsAction = (userId:number, page:number, limit:number) => 
+    async(dispatch:Dispatch<IFetchUserReviews>, getState:() => IStore) => {
+    dispatch({
+        type: UserActionsEnum.FETCHUSERREVIEWS,
+        reviews: [],
+        fetching: true  
+    })
+    let reviews:IReview[] = RestService.getUserReviews(userId, page, limit);
+    setTimeout(() => {
+        dispatch({
+            type: UserActionsEnum.FETCHUSERREVIEWS,
+            reviews: reviews,
+            fetching: false
+        })
+    }, 500)
+}
+
+export const fetchUserFeesAction = (userId:number, page:number, limit:number) => 
+    async(dispatch:Dispatch<IFetchUserFees>, getState:() => IStore) => {
+    dispatch({
+        type: UserActionsEnum.FETCHUSERFEES,
+        fees: [],
+        fetching: true  
+    })
+    let fees:IFee[] = RestService.getUserFees(userId, page, limit);
+    setTimeout(() => {
+        dispatch({
+            type: UserActionsEnum.FETCHUSERFEES,
+            fees: fees,
+            fetching: false
+        })
+    }, 500)
 }

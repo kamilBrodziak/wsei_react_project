@@ -10,7 +10,7 @@ import AccountRoutes from "./routes/AccountRoutes";
 import LeftPanel from "./components/LeftPanel/LeftPanel";
 import Colors from "./styledHelpers/Colors";
 import { AnyAction } from "redux";
-import { loginUser, UserActionsEnum } from "./actions/UserActions";
+import { loginUserAction, UserActionsEnum } from "./actions/UserActions";
 import { connect } from "react-redux";
 import { IRootState } from "./reducers/rootReducer";
 import Breakpoints from "./styledHelpers/Breakpoints";

@@ -4,7 +4,9 @@ import Loading from '../../../../Common/Animations/Loading';
 import Button from '../../../../Common/Buttons/Button';
 
 const SaveButtonStyled = styled(Button)`
-    position: absolute;
+    && {
+        position: absolute;
+    }
     top: 0;
     right: 0;
 `

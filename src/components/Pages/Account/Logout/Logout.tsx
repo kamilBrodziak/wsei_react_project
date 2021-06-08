@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import styled from 'styled-components';
-import { getLoggedUser, logoutUser } from '../../../../actions/UserActions';
+import { getLoggedUser, logoutUserAction } from '../../../../actions/UserActions';
 import { IStore } from '../../../../reducers/rootReducer';
 import { IUser } from '../../../../Utils/IRestObjects';
 import Loading from '../../../Common/Animations/Loading';
@@ -47,7 +47,7 @@ const mapStateToProps = (state:IStore) => {
 
 const mapDispatchToProps = (dispatch:any) => {
     return {
-        logout: () => {dispatch(logoutUser())}
+        logout: () => {dispatch(logoutUserAction())}
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Logout);

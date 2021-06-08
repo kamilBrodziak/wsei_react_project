@@ -4,7 +4,8 @@ const Colors = {
     linkVisited: `#6EAABA`,
     darkGray: `#3e3e3e`,
     gray: "gray",
-    lightGray: "#eaeaea"
+    lightGray: "#eaeaea",
+    linkCyan: '5da0b2'
 }
 
 export default Colors;

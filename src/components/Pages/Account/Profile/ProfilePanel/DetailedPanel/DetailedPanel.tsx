@@ -1,15 +1,18 @@
 import React, { FC, useState } from 'react'
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { updateUserInformation } from '../../../../../../actions/UserActions';
+import { updateUserInformationAction } from '../../../../../../actions/UserActions';
 import { IStore } from '../../../../../../reducers/rootReducer';
 import { IUserAdditionalInformation, IUserExpertise, IUserPanelInformation } from '../../../../../../Utils/IRestObjects';
 import { deepClone } from '../../../../../../utils/Utils';
 import SaveButton from '../../Common/SaveButton';
 import Expertise from './Expertise/Expertise';
+import Fees from './Fees/Fees';
 import Informations from './Informations/Informations';
 import InternalCorrespondants from './Informations/InternalCorrespondants/InternalCorrespondants';
 import ServicesAndProjects from './Informations/ServicesAndProjects/ServicesAndProjects';
+import InternalReviews from './InternalReviews/InternalReviews';
+import Proposals from './Proposals/Proposals';
 
 
 const InformationPanelStyled = styled.div`
@@ -65,7 +68,9 @@ const InformationPanel:FC<IProps> = ({userInformation, editable, updateInformati
             <Expertise expertise={expertiseState} editingState={editingState} parentHandleOnChange={handleExpertiseOnChange} />
             <Informations editingState={editingState} information={informationState}
                 parentHandleOnChange={handleInformationOnChange} />
-            
+            <Proposals userId={userInformation.userId} />
+            <InternalReviews userId={userInformation.userId} />
+            <Fees userId={userInformation.userId} />
             { editable && 
                 <SaveButtonStyled editingState={editingState} validState={true} handleSave={handleSave} 
                     updatingState={updatingState}/>
@@ -81,7 +86,7 @@ const mapStateToProps = (state:IStore) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        updateInformation: (informations:IUserAdditionalInformation) => dispatch(updateUserInformation(informations))
+        updateInformation: (informations:IUserAdditionalInformation) => dispatch(updateUserInformationAction(informations))
     }
 }
 

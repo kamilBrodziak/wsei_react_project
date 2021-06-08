@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { connect } from 'react-redux';
 import { RouteComponentProps, RouteProps, RouterProps } from 'react-router';
 import styled from 'styled-components';
-import { getLoggedUser, loginUser } from '../../../../actions/UserActions';
+import { getLoggedUser, loginUserAction } from '../../../../actions/UserActions';
 import { IStore } from '../../../../reducers/rootReducer';
 import AccountRoutes from '../../../../routes/AccountRoutes';
 import Colors from '../../../../styledHelpers/Colors';
@@ -135,7 +135,7 @@ const mapStateToProps = (state:IStore) => {
 
 const mapDispatchToProps = (dispatch:any) => {
     return {
-        login: (id: number) => dispatch(loginUser(id))
+        login: (id: number) => dispatch(loginUserAction(id))
     }
 }
 

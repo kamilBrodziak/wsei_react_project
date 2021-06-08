@@ -54,7 +54,7 @@ const InternalCorrespondants:FC<IProps> = ({correspondantsIds, getUsers, loading
 
 const mapStateToProps = (state:IStore) => {
     return {
-        loading: state.userState.userLoading
+        loading: state.userState.userFetching
     }
 }
 
