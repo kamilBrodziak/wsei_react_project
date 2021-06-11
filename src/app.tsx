@@ -10,7 +10,7 @@ import AccountRoutes from "./routes/AccountRoutes";
 import LeftPanel from "./components/LeftPanel/LeftPanel";
 import Colors from "./styledHelpers/Colors";
 import { AnyAction } from "redux";
-import { loginUserAction, UserActionsEnum } from "./actions/UserActions";
+import { loginUserAction} from "./actions/UserActions";
 import { connect } from "react-redux";
 import { IRootState } from "./reducers/rootReducer";
 import Breakpoints from "./styledHelpers/Breakpoints";
@@ -21,7 +21,7 @@ const SiteContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 1024px;
+    max-width: 1296px;
     margin: 0 auto;
     height: auto;
 `

@@ -5,6 +5,13 @@ import EntitiesIcon from "../assets/icons/entities.svg";
 import PeopleIcon from "../assets/icons/people.svg";
 import AdministrationIcon from "../assets/icons/administration.svg";
 
+export enum PlatformPaths {
+    PUBLICATIONS = '/publications',
+    PEOPLE = '/people',
+    ENTITIES = '/entities',
+    ADMINISTRATION = '/administration',
+}
+
 const HomeRoute: IAppRoute = {
     name: 'Home',
     path: '/',
@@ -20,22 +27,22 @@ const PlatformRoutes:IAppRoutes = {
         HomeRoute,
         {
             name: 'Publications',
-            path: '/publications',
+            path: PlatformPaths.PUBLICATIONS,
             icon: PublicationsIcon
         },
         {
             name: 'People',
-            path: '/people',
+            path: PlatformPaths.PEOPLE,
             icon: PeopleIcon
         },
         {
             name: 'Entities',
-            path: '/entities',
+            path: PlatformPaths.ENTITIES,
             icon: EntitiesIcon
         },
         {
             name: 'Administration',
-            path: '/administration',
+            path: PlatformPaths.ADMINISTRATION,
             icon: AdministrationIcon
         }
     ]

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { fetchUserReviewsAction } from '../../../../../../../actions/UserActions';
 import { IStore } from '../../../../../../../reducers/rootReducer';
-import { IReview } from '../../../../../../../Utils/IRestObjects';
+import { IReview } from '../../../../../../../utils/IRestUser';
 import Header from '../../../Common/Header';
 import Panel from '../../../Common/Panel';
 import TablePaginated from '../../../../../../Common/Tables/TablePaginated';

@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import styled from 'styled-components';
-import { IUserExpertise } from '../../../../../../../Utils/IRestObjects';
+import { IUserExpertise } from '../../../../../../../utils/IRestUser';
 import Panel from '../../../Common/Panel';
 import Item from './Items/Item';
 

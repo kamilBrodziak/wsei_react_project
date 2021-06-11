@@ -1,6 +1,16 @@
-import { IFee, IPhoto, IProposal, IReview, IUser, IUserAdditionalInformation } from "./IRestObjects";
+import userReducer from "../reducers/userReducer";
+import { IPhoto } from "./IRestFiles";
+import { IPost, IRestPost } from "./IRestPost";
+import { IFee, IProposal, IReview, IUser, IUserAdditionalInformation } from "./IRestUser";
 
 const API = "https://jsonplaceholder.typicode.com";
+
+interface IJsonPostRest {
+    id: number;
+    userId: number;
+    title: string;
+    body: string;
+}
 
 class RestService {
     public static getPhoto(id: number) : Promise<IPhoto> {
@@ -9,6 +19,16 @@ class RestService {
 
     public static getUser(id: number) : Promise<IUser> {
         return fetch(`${API}/users/${id}`).then(response => response.json());
+    }
+
+    public static getPost(id: number) : Promise<IRestPost> {
+        return fetch(`${API}/posts/${id}`).then(response => response.json()).then((json:IJsonPostRest) => {
+            return {
+                ...json,
+                date: new Date(),
+                photoId: json.id
+            }
+        });
     }
 
     public static getUserProposals(userId: number, page=0, limit=3):IProposal[] {

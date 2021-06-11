@@ -1,3 +1,5 @@
+import { IAttachment, IPhoto } from "./IRestFiles";
+
 export interface IAddress {
     street: string,
     suite: string,
@@ -15,24 +17,19 @@ export interface ICompany {
     bs: string
 }
 
-export interface IPhoto {
-    id: number,
-    albumId: number,
-    title: string,
-    url: string,
-    thumbnailUrl: string
+export interface IUserPostEssentials {
+    id: number;
+    name: string;
+    photo: IPhoto;
 }
 
-export interface IUser {
-    id: number,
-    name: string,
+export interface IUser extends IUserPostEssentials {
     username: string,
     email: string,
     address: IAddress,
     phone: string,
     website: string,
     company: ICompany,
-    photo: IPhoto
 }
 
 export interface IUserAdditionalInformation {
@@ -50,11 +47,6 @@ export interface IUserPanelInformation {
 export interface IUserPanelInformationTerms {
     text: string;
     attachment: IAttachment;
-}
-
-export interface IAttachment {
-    name: string;
-    path: string;
 }
 
 export interface IUserExpertise {

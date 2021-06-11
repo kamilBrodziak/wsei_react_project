@@ -1,4 +1,4 @@
-import { IFee, IProposal, IReview, IUser, IUserAdditionalInformation } from "../Utils/IRestObjects";
+import { IFee, IProposal, IReview, IUser, IUserAdditionalInformation } from "../utils/IRestUser";
 
 export enum UserActionsEnum {
     'SETUSERS' = 'SET_USERS',

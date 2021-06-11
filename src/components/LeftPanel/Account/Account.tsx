@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { getLoggedUser } from '../../../actions/UserActions';
 import { IStore } from '../../../reducers/rootReducer';
 import { FlexCentered } from '../../../styledHelpers/Positioning';
-import { IUser } from '../../../Utils/IRestObjects';
+import { IUser } from '../../../utils/IRestUser';
 import Loading from '../../Common/Animations/Loading';
 import Details from './Details/Details';
 import LoginLink from './LoginLink/LoginLink';

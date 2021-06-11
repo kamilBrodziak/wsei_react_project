@@ -1,7 +1,8 @@
 const Colors = {
     link: "#6EAABA",
-    linkDark: "#374ba3",
+    linkDark: "#2a3f9d",
     linkVisited: `#6EAABA`,
+    boxShadow: 'lightgrey',
     darkGray: `#3e3e3e`,
     gray: "gray",
     lightGray: "#eaeaea",

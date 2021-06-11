@@ -2,7 +2,7 @@ import { FC, MouseEvent } from 'react'
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { IStore } from '../../../../../reducers/rootReducer';
-import { IUser } from '../../../../../utils/IRestObjects';
+import { IUser } from '../../../../../utils/IRestUser';
 import Menu from './Menu/Menu';
 import Loading from '../../../../Common/Animations/Loading';
 import LogoutLink from './LogoutLink/LogoutLink';

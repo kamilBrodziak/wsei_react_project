@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import styled from 'styled-components';
 import AccountRoutes from '../../../../../../routes/AccountRoutes';
-import { IUser } from '../../../../../../Utils/IRestObjects';
+import { IUser } from '../../../../../../utils/IRestUser';
 import Figure from '../../../../../Common/Icons/Figure';
 import Icon from '../../../../../Common/Icons/Icon';
 import Link from '../../../../../Common/Links/Link';

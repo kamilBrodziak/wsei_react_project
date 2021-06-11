@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import styled from 'styled-components';
-import { IUserPanelInformationTerms } from '../../../../../../../../Utils/IRestObjects';
+import { IUserPanelInformationTerms } from '../../../../../../../../utils/IRestUser';
 import EditableSpan from '../../../../../../../Common/Editable/Elements/EditableSpan';
 import AttachmentInput from '../../../../Common/AttachmentInput';
 import Input from '../../../../Common/Input';

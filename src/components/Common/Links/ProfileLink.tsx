@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { AccountPaths } from '../../../routes/AccountRoutes';
-import { IPhoto } from '../../../Utils/IRestObjects';
+import { IPhoto } from '../../../utils/IRestUser';
 import Figure from '../Icons/Figure';
 import Link from './Link';
 import DefaultIcon from '../../../assets/icons/bell.svg';

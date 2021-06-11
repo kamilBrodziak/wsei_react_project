@@ -5,7 +5,7 @@ import { IStore } from '../../../../reducers/rootReducer';
 import AccountRoutes from '../../../../routes/AccountRoutes';
 import Colors from '../../../../styledHelpers/Colors';
 import { FlexCentered } from '../../../../styledHelpers/Positioning';
-import { IUser } from '../../../../utils/IRestObjects';
+import { IUser } from '../../../../utils/IRestUser';
 import Figure from '../../../Common/Icons/Figure';
 import Icon from '../../../Common/Icons/Icon';
 import Link from '../../../Common/Links/Link';

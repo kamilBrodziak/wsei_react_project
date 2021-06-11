@@ -2,7 +2,7 @@ import { FC } from 'react'
 import styled from 'styled-components';
 import PlatformRoutes from '../../../../../../../routes/PlatformRoutes';
 import { FlexCentered } from '../../../../../../../styledHelpers/Positioning';
-import { IPhoto } from '../../../../../../../Utils/IRestObjects';
+import { IPhoto } from '../../../../../../../utils/IRestFiles';
 import Figure from '../../../../../../Common/Icons/Figure';
 import Icon from '../../../../../../Common/Icons/Icon';
 import Link from '../../../../../../Common/Links/Link';

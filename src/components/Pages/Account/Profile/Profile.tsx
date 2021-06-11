@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { fetchUserAction, getLoggedUser, getLoggedUserInformation } from '../../../../actions/UserActions';
 import { IStore } from '../../../../reducers/rootReducer';
 import AccountRoutes from '../../../../routes/AccountRoutes';
-import { IUser, IUserAdditionalInformation } from '../../../../Utils/IRestObjects';
+import { IUser, IUserAdditionalInformation } from '../../../../utils/IRestUser';
 import Loading from '../../../Common/Animations/Loading';
 import GeneralPanel from './ProfilePanel/GeneralPanel/GeneralPanel';
 import ProfilePanel from './ProfilePanel/ProfilePanel';

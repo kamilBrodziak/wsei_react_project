@@ -1,7 +1,6 @@
 import { AnyAction, combineReducers } from "redux";
-import { UserActionsEnum } from "../actions/UserActions";
-import { IUser } from "../utils/IRestObjects";
-import RestService from "../utils/RestService";
+import photoReducer, { IPhotoState } from "./photoReducer";
+import postReducer, { IPostState } from "./postReducer";
 import userReducer, { IUserState } from "./userReducer";
 
 
@@ -9,7 +8,9 @@ export interface IRootState {}
 
 export interface IStore extends IRootState, IUserState  {
     userState: IUserState
-    rootState: IRootState
+    rootState: IRootState,
+    postState: IPostState,
+    photoState: IPhotoState
 }
 
 const initState : IRootState = {
@@ -23,5 +24,7 @@ const rootReducer = (state = initState, action : AnyAction) => {
 
 export default combineReducers({
     rootState: rootReducer,
-    userState: userReducer
+    userState: userReducer,
+    postState: postReducer,
+    photoState: photoReducer
 });

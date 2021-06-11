@@ -1,7 +1,7 @@
 import { Dispatch } from "react";
 import { IStore } from "../reducers/rootReducer";
 import { IUserState } from "../reducers/userReducer";
-import { IFee, IProposal, IReview, IUser, IUserAdditionalInformation } from "../Utils/IRestObjects";
+import { IFee, IProposal, IReview, IUser, IUserAdditionalInformation } from "../utils/IRestUser";
 import RestService from "../utils/RestService"
 import { IFetchUserAction, IFetchUserFees, IFetchUserProposals, IFetchUserReviews, IFetchUserStatusAction, ISetUsersAction, ISetUsersInformationAction, IUserLoginAction, IUserLogoutAction, UserActionsEnum } from "./IUserActions";
 

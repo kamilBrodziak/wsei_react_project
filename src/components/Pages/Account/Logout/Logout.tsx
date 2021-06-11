@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router';
 import styled from 'styled-components';
 import { getLoggedUser, logoutUserAction } from '../../../../actions/UserActions';
 import { IStore } from '../../../../reducers/rootReducer';
-import { IUser } from '../../../../Utils/IRestObjects';
+import { IUser } from '../../../../utils/IRestUser';
 import Loading from '../../../Common/Animations/Loading';
 
 const LogoutStyled = styled.section`

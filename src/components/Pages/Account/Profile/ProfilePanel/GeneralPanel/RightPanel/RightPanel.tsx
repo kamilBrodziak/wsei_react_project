@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import styled, { css } from 'styled-components';
 import Colors from '../../../../../../../styledHelpers/Colors';
-import { IUser } from '../../../../../../../Utils/IRestObjects';
+import { IUser } from '../../../../../../../utils/IRestUser';
 
 const RightPanelStyled = styled.div`
     display: flex;

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import Colors from '../../../../../../../../../styledHelpers/Colors';
-import { IUser } from '../../../../../../../../../Utils/IRestObjects';
+import { IUser } from '../../../../../../../../../utils/IRestUser';
 import Figure from '../../../../../../../../Common/Icons/Figure';
 import Icon from '../../../../../../../../Common/Icons/Icon';
 import MessageIcon from '../../../../../../../../../assets/icons/bell.svg'

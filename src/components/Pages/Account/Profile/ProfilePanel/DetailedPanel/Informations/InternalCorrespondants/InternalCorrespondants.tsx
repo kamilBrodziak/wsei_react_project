@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import {getUsers } from '../../../../../../../../actions/UserActions';
 import { IStore } from '../../../../../../../../reducers/rootReducer';
-import { IUser } from '../../../../../../../../Utils/IRestObjects';
+import { IUser } from '../../../../../../../../utils/IRestUser';
 import Loading from '../../../../../../../Common/Animations/Loading';
 import Header from '../../../../Common/Header';
 import Correspondant from './Correspondant/Correspondant';

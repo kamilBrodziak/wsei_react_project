@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 import styled, { css } from 'styled-components';
 import Colors from '../../../../../styledHelpers/Colors';
-import { IAttachment } from '../../../../../Utils/IRestObjects';
 import Figure from '../../../../Common/Icons/Figure';
 import Icon from '../../../../Common/Icons/Icon';
 import FileIcon from "../../../../../assets/icons/bell.svg";
+import { IAttachment } from '../../../../../utils/IRestFiles';
 
 const AttachmentStyled = styled.div`
     display: flex;

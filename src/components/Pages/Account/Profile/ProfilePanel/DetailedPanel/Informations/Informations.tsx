@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import styled from 'styled-components';
-import { IUserPanelInformation } from '../../../../../../../Utils/IRestObjects';
+import { IUserPanelInformation } from '../../../../../../../utils/IRestUser';
 import Header from '../../../Common/Header';
 import Panel from '../../../Common/Panel';
 import Fee from './Fee/Fee';

@@ -5,7 +5,7 @@ import { updateUserAction } from '../../../../../../actions/UserActions';
 import { IStore } from '../../../../../../reducers/rootReducer';
 import Breakpoints from '../../../../../../styledHelpers/Breakpoints';
 import Colors from '../../../../../../styledHelpers/Colors';
-import { IUser } from '../../../../../../Utils/IRestObjects';
+import { IUser } from '../../../../../../utils/IRestUser';
 import { deepClone } from '../../../../../../utils/Utils';
 import Loading from '../../../../../Common/Animations/Loading';
 import Button from '../../../../../Common/Buttons/Button';

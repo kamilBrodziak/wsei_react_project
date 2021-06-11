@@ -7,7 +7,7 @@ import { IStore } from '../../../../reducers/rootReducer';
 import AccountRoutes from '../../../../routes/AccountRoutes';
 import Colors from '../../../../styledHelpers/Colors';
 import { FlexCentered } from '../../../../styledHelpers/Positioning';
-import { IUser } from '../../../../Utils/IRestObjects';
+import { IUser } from '../../../../utils/IRestUser';
 import Loading from '../../../Common/Animations/Loading';
 
 const LoginStyled = styled.section`

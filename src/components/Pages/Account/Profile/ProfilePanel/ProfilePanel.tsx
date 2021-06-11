@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import styled from 'styled-components';
-import { IUser, IUserAdditionalInformation } from '../../../../../Utils/IRestObjects';
+import { IUser, IUserAdditionalInformation } from '../../../../../utils/IRestUser';
 import Loading from '../../../../Common/Animations/Loading';
 import GeneralPanel from './GeneralPanel/GeneralPanel';
 import DetailedPanel from './DetailedPanel/DetailedPanel';

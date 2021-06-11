@@ -5,33 +5,41 @@ import EntitiesIcon from "../assets/icons/entities.svg";
 import PeopleIcon from "../assets/icons/people.svg";
 import AdministrationIcon from "../assets/icons/administration.svg";
 
+export enum WorkspacesPaths {
+    CLIENTCONTRACT = '/client_contract',
+    SUPPLIERCONTRACT = '/supplier_contract',
+    CORPORATE = '/corporate',
+    GROUPNORMS = '/group_norms',
+    REALESTATECONTRACTS = '/real_estate_contracts'
+}
+
 const WorkspacesRoutes:IAppRoutes = {
     label: "Workspaces",
     routes: [
         {
             name: 'Client contract',
-            path: '/client_contract',
+            path: WorkspacesPaths.CLIENTCONTRACT,
             icon: HomeIcon,
             exact: true
         },
         {
             name: 'Supplier contract',
-            path: '/supplier_contract',
+            path: WorkspacesPaths.SUPPLIERCONTRACT,
             icon: PublicationsIcon
         },
         {
             name: 'Corporate',
-            path: '/corporate',
+            path: WorkspacesPaths.CORPORATE,
             icon: PeopleIcon
         },
         {
             name: 'Group Norms',
-            path: '/group_norms',
+            path: WorkspacesPaths.GROUPNORMS,
             icon: EntitiesIcon
         },
         {
             name: 'Real estate contracts',
-            path: '/real_estate_contracts',
+            path: WorkspacesPaths.REALESTATECONTRACTS,
             icon: AdministrationIcon
         }
     ]

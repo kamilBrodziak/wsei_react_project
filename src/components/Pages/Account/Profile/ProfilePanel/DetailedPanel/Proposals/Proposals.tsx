@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { fetchUserProposalsAction } from '../../../../../../../actions/UserActions';
 import { IStore } from '../../../../../../../reducers/rootReducer';
-import { IProposal } from '../../../../../../../Utils/IRestObjects';
+import { IProposal } from '../../../../../../../utils/IRestUser';
 import Header from '../../../Common/Header';
 import Panel from '../../../Common/Panel';
 import TablePaginated from '../../../../../../Common/Tables/TablePaginated';

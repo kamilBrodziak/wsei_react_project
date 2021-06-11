@@ -1,6 +1,5 @@
-import { AnyAction } from "redux";
 import { TUserActions, UserActionsEnum } from "../actions/IUserActions";
-import { IFee, IProposal, IReview, IUser, IUserAdditionalInformation } from "../Utils/IRestObjects";
+import { IFee, IProposal, IReview, IUser, IUserAdditionalInformation } from "../utils/IRestUser";
 
 export interface IUserState {
     loginLoading: boolean,

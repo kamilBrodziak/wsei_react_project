@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { updateUserInformationAction } from '../../../../../../actions/UserActions';
 import { IStore } from '../../../../../../reducers/rootReducer';
-import { IUserAdditionalInformation, IUserExpertise, IUserPanelInformation } from '../../../../../../Utils/IRestObjects';
+import { IUserAdditionalInformation, IUserExpertise, IUserPanelInformation } from '../../../../../../utils/IRestUser';
 import { deepClone } from '../../../../../../utils/Utils';
 import SaveButton from '../../Common/SaveButton';
 import Expertise from './Expertise/Expertise';
