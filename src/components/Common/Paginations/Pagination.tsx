@@ -62,12 +62,13 @@ interface IProps {
 }
 
 const Pagination:FC<IProps> = ({onClick, page, maxPage}) => {
+    maxPage = maxPage - 1;
     const [currPage, setCurrPage] = useState(page);
     const [ref, { width }] = useMeasure<HTMLElement>();
     const isDesktop = () => width > 560;
     const handleOnClick = (change: number) => {
         setCurrPage(change);
-        onClick(currPage);
+        onClick(change);
     }
     const wrapWithListItem = (element:JSX.Element, key:number) => <PaginationListItem key={key}>{element}</PaginationListItem>
     const generateButtonItem = (change: number, text:string|number, key:number) => wrapWithListItem(

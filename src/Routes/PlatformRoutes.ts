@@ -26,10 +26,21 @@ const PlatformRoutes:IAppRoutes = {
     routes: [
         HomeRoute,
         {
-            name: 'Publications',
-            path: PlatformPaths.PUBLICATIONS,
+            name: 'Publication',
+            path: `${PlatformPaths.PUBLICATIONS}/:id`,
             icon: PublicationsIcon
         },
+        {
+            name: 'Publications',
+            path: `${PlatformPaths.PUBLICATIONS}?:page`,
+            icon: PublicationsIcon
+        },
+        {
+            name: 'Publications',
+            path: `${PlatformPaths.PUBLICATIONS}`,
+            icon: PublicationsIcon
+        },
+        
         {
             name: 'People',
             path: PlatformPaths.PEOPLE,

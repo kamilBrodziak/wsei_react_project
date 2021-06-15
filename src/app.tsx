@@ -2,7 +2,7 @@ import React, { Dispatch, FC } from "react";
 import styled from "styled-components";
 import Header from "./components/Header/Header";
 import GlobalStyle from "./styledHelpers/GlobalStyle";
-import { BrowserRouter, Route } from "react-router-dom"
+import { BrowserRouter, Route, Switch } from "react-router-dom"
 import Home from "./components/Pages/Platform/Home/Home";
 import AppRoutes, { AllRoutes } from "./routes/Routes";
 import ComponentRegistry from "./routes/ComponentRegistry";
@@ -57,11 +57,13 @@ const App:FC = (props) => {
                 <MainContainer>
                     <LeftPanel />
                     <ContentContainer>
-                        {AllRoutes.map(({routes}) => {
-                            return routes.map(({exact,name, path}) => {
-                                return <Route key={key++} exact={exact} path={path} component={ComponentRegistry[name]} />
-                            })
-                        })}
+                        <Switch>
+                            {AllRoutes.map(({routes}) => {
+                                return routes.map(({exact,name, path}) => {
+                                    return <Route key={key++} exact={exact} path={path} component={ComponentRegistry[name]} />
+                                })
+                            })}
+                        </Switch>
                     </ContentContainer>
                 </MainContainer>
             </SiteContainer>

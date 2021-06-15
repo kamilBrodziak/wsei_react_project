@@ -10,10 +10,12 @@ import Logout from "../components/Pages/Account/Logout/Logout";
 import React, { FC } from "react";
 import Login from "../components/Pages/Account/Login/Login";
 import Register from "../components/Pages/Account/Register/Register";
+import Publication from "../components/Pages/Platform/Publications/Publication";
 
 const ComponentRegistry:{[key: string]: typeof React.Component | FC} = {
     "Home": Home,
     "Publications": Publications,
+    "Publication": Publication,
     "People": People,
     "Entities": Entities,
     "Administration": Administration,

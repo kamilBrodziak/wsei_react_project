@@ -4,7 +4,7 @@ import { FlexCentered } from "../../../../styledHelpers/Positioning";
 import Figure from "../../../Common/Icons/Figure";
 import Icon from "../../../Common/Icons/Icon";
 import arrowDownSrc from '../../../../assets/icons/arrow-down.svg';
-import { RouteComponentProps, useLocation, useRouteMatch, withRouter } from "react-router-dom";
+import { RouteComponentProps, useHistory, useLocation, useRouteMatch, withRouter } from "react-router-dom";
 import { AllRoutes } from "../../../../routes/Routes";
 import { IAppRoute } from "../../../../routes/IRoutes";
 import { HomeRoute } from "../../../../Routes/PlatformRoutes";

@@ -1,12 +1,15 @@
-import { FC } from 'react';
+import { Dispatch, FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { fetchPhotosAction } from '../../../../../actions/PhotoActions';
-import { fetchPostsAction } from '../../../../../actions/PostActions';
+import { fetchPostsAction, fetchPostsQueryAction, getPost, getPosts, getQueryPost as getQueryPosts } from '../../../../../actions/PostActions';
 import { IStore } from '../../../../../reducers/rootReducer';
 import { PlatformPaths } from '../../../../../routes/PlatformRoutes';
 import Colors from '../../../../../styledHelpers/Colors';
-import { IPost } from '../../../../../utils/IRestPost';
+import { IPhoto } from '../../../../../utils/IRestFiles';
+import { IPost, IRestPost } from '../../../../../utils/IRestPost';
+import { IQueryOptions } from '../../../../../utils/IRestQuery';
+import { IUser } from '../../../../../utils/IRestUser';
 import { missingValues } from '../../../../../utils/Utils';
 import Loading from '../../../../Common/Animations/Loading';
 import Link from '../../../../Common/Links/Link';
@@ -52,25 +55,32 @@ const LinkStyled = styled(Link)`
 `
 
 interface IProps {
-    getPosts: (ids:number[]) => IPost[];
-    posts: {[key:number]:IPost}
+    fetchPosts: (query:IQueryOptions) => void;
     loading: boolean;
+    photos: {[key:number]:IPhoto};
+    users: IUser[];
+    posts: {[key:number]:IRestPost};
+    queries: {[key:string]:number[]};
 }
 
-const Widget:FC<IProps> = ({loading, getPosts, posts}) => {
-    const ids = [1,2,3,4];
+const Widget:FC<IProps> = ({loading, fetchPosts, queries, posts, photos, users}) => {
     let content = <Loading width="100%" height="200px" />
-    const postsIds = Object.keys(posts).map(id => parseInt(id));
-    const missingIds = missingValues(ids, postsIds);
-    if(missingIds.length) {
-        getPosts(ids);
-    } else if(!loading) {
+    const options:IQueryOptions = {_page: 1, _limit: 4}
+    const [postsDisplayed, setPostsDisplayed] = useState<IPost[]>(null);
+    useEffect(() => {
+        fetchPosts(options)     
+    }, [])
+    useEffect(() => {
+        setPostsDisplayed(getPosts(options, queries, posts, photos, users))
+    }, [queries, options])
+
+    if(!loading && postsDisplayed) {
         const link = `${PlatformPaths.PUBLICATIONS}`;
         content = <>
-            <ImageHeaderStyled post={posts[1]} />
+            <ImageHeaderStyled post={postsDisplayed[0]} />
             <ContentContainer>
                 <TitleStyled>Latest publications</TitleStyled>
-                {ids.map((id, i) => i !== 0 ? <ShortPostStyled key={i} post={posts[id]} /> : null)}
+                {postsDisplayed.map((post, i) => i !== 0 ? <ShortPostStyled key={i} post={post} /> : null)}
                 <LinkStyled to={link}>See more publications</LinkStyled>
             </ContentContainer>
         </>
@@ -85,13 +95,16 @@ const Widget:FC<IProps> = ({loading, getPosts, posts}) => {
 const mapStateToProps = (state: IStore) => {
     return {
         loading: state.postState.fetching,
-        posts: state.postState.posts
+        queries: state.postState.queries,
+        posts: state.postState.posts,
+        photos: state.photoState.photos,
+        users: state.userState.users
     }
 }
 
 const mapDispatchToProps = (dispatch:any) => {
     return {
-        getPosts: (ids:number[]) => dispatch(fetchPostsAction(ids))
+        fetchPosts: (query:IQueryOptions) => dispatch(fetchPostsQueryAction(query))
     }
 }
 

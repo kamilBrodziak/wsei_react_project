@@ -54,4 +54,12 @@ const dateToString = (pattern:string, date:Date) => {
     return dateStr.replace(/(y+)/g, (year:string):string => date.getFullYear().toString().slice(-year.length));
 }
 
-export {checkValidation, deepClone, distinctArr, missingValues, dateToString}
+const range = (start:number, stop:number, step:number=1) => {
+    const items = [];
+    for(let i = start; start < stop; i+=step) {
+        items.push(i);
+    }
+    return items;
+}
+
+export {range, checkValidation, deepClone, distinctArr, missingValues, dateToString}

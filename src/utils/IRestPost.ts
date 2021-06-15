@@ -18,3 +18,4 @@ export interface IPost {
     photo: IPhoto;
     user: IUser;
 }
+

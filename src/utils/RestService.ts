@@ -1,6 +1,6 @@
-import userReducer from "../reducers/userReducer";
 import { IPhoto } from "./IRestFiles";
-import { IPost, IRestPost } from "./IRestPost";
+import { IRestPost } from "./IRestPost";
+import { IQueryOptions } from "./IRestQuery";
 import { IFee, IProposal, IReview, IUser, IUserAdditionalInformation } from "./IRestUser";
 
 const API = "https://jsonplaceholder.typicode.com";
@@ -12,6 +12,8 @@ interface IJsonPostRest {
     body: string;
 }
 
+export const getQueryString = (options:IQueryOptions) => Object.entries(options).map((val) => `${val[0]}=${val[1]}`).join("&")
+
 class RestService {
     public static getPhoto(id: number) : Promise<IPhoto> {
         return fetch(`${API}/photos/${id}`).then(response => response.json());
@@ -19,6 +21,19 @@ class RestService {
 
     public static getUser(id: number) : Promise<IUser> {
         return fetch(`${API}/users/${id}`).then(response => response.json());
+    }
+
+    public static getPostQuery(queryStr: string):Promise<IRestPost[]> {
+        console.log(`${API}/posts?${queryStr}`)
+        return fetch(`${API}/posts?${queryStr}`).then(response => response.json()).then((json:IJsonPostRest[]) => {
+            return json.map(val => {
+                return {
+                    ...val,
+                    date: new Date(),
+                    photoId: val.id
+                }
+            });
+        }); 
     }
 
     public static getPost(id: number) : Promise<IRestPost> {

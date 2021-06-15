@@ -48,7 +48,7 @@ interface IProps {
 }
 
 const ShortPost:FC<IProps> = ({className, post}) => {
-    const link = `${PlatformPaths.PUBLICATIONS}?id=${post.id}`;
+    const link = `${PlatformPaths.PUBLICATIONS}/${post.id}`;
     return (
         <ShortPostStyled className={className}>
             <FigureStyled width="60px" height="60px">

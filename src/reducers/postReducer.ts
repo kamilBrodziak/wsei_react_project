@@ -1,16 +1,18 @@
 import { PostActionsEnum, TPostActions } from "../actions/IPostActions";
-import { IPost } from "../utils/IRestPost";
+import { IPost, IRestPost } from "../utils/IRestPost";
 
 export interface IPostState {
-    posts: {[id: number]: IPost},
+    posts: {[id: number]: IRestPost},
     fetching: boolean,
-    error: string
+    error: string,
+    queries: {[key: string]: number[]} // example: "{"_page=1&_limit=10": [0,1,2,3,4,10,15,20,21,33]}" 
 }
 
 const initState : IPostState = {
     posts: {},
     fetching: false,
-    error: null
+    error: null,
+    queries: {}
 }
 
 const postReducer = (state = initState, action:TPostActions):IPostState => {
@@ -27,6 +29,11 @@ const postReducer = (state = initState, action:TPostActions):IPostState => {
             fetching: false,
             posts: {...state.posts, ...action.posts}
         };
+        case PostActionsEnum.FETCH_POST_QUERY_SUCCESS: return {...state,
+            queries: {...state.queries, ...action.queries},
+            fetching: false,
+            posts: {...state.posts, ...action.posts}
+        }
         default: return state;
     }
 }
