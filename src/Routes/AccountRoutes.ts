@@ -20,32 +20,38 @@ const AccountRoutes: IAppRoutes = {
             name: 'Profile',
             path: AccountPaths.PROFILE,
             exact: true,
-            icon: HomeIcon
+            icon: HomeIcon,
+            shownInMenu: true,
         },
         {
             name: 'Privacy',
             path: AccountPaths.PRIVACY,
-            icon: PrivacyIcon
+            icon: PrivacyIcon,
+            shownInMenu: true,
         },
         {
             name: 'Settings',
             path: AccountPaths.SETTINGS,
-            icon: SettingsIcon
+            icon: SettingsIcon,
+            shownInMenu: true
         },
         {
             name: "Logout",
             path: AccountPaths.LOGOUT,
-            icon: LogoutIcon
+            icon: LogoutIcon,
+            shownInMenu: true
         },
         {
             name: "Login",
             path: AccountPaths.LOGIN,
-            icon: LogoutIcon
+            icon: LogoutIcon,
+            shownInMenu: true,
         },
         {
             name: "Register",
             path: AccountPaths.REGISTER,
-            icon: LogoutIcon
+            icon: LogoutIcon,
+            shownInMenu: true
         }
         
 

@@ -72,7 +72,7 @@ const Widget:FC<IProps> = ({loading, fetchPosts, queries, posts, photos, users})
     }, [])
     useEffect(() => {
         setPostsDisplayed(getPosts(options, queries, posts, photos, users))
-    }, [queries, options])
+    }, [queries, loading])
 
     if(!loading && postsDisplayed) {
         const link = `${PlatformPaths.PUBLICATIONS}`;

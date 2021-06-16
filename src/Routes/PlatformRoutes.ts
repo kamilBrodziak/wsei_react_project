@@ -16,7 +16,8 @@ const HomeRoute: IAppRoute = {
     name: 'Home',
     path: '/',
     icon: HomeIcon,
-    exact: true
+    exact: true,
+    shownInMenu: true
 }
 
 export {HomeRoute};
@@ -28,33 +29,39 @@ const PlatformRoutes:IAppRoutes = {
         {
             name: 'Publication',
             path: `${PlatformPaths.PUBLICATIONS}/:id`,
-            icon: PublicationsIcon
+            icon: PublicationsIcon,
+            shownInMenu: false
         },
         {
             name: 'Publications',
             path: `${PlatformPaths.PUBLICATIONS}?:page`,
-            icon: PublicationsIcon
+            icon: PublicationsIcon,
+            shownInMenu: false,
         },
         {
             name: 'Publications',
             path: `${PlatformPaths.PUBLICATIONS}`,
-            icon: PublicationsIcon
+            icon: PublicationsIcon,
+            shownInMenu: true,
         },
         
         {
             name: 'People',
             path: PlatformPaths.PEOPLE,
-            icon: PeopleIcon
+            icon: PeopleIcon,
+            shownInMenu: true,
         },
         {
             name: 'Entities',
             path: PlatformPaths.ENTITIES,
-            icon: EntitiesIcon
+            icon: EntitiesIcon,
+            shownInMenu: true,
         },
         {
             name: 'Administration',
             path: PlatformPaths.ADMINISTRATION,
-            icon: AdministrationIcon
+            icon: AdministrationIcon,
+            shownInMenu: true,
         }
     ]
 }

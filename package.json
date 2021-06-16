@@ -60,6 +60,7 @@
     "@types/react-redux": "^7.1.16",
     "@types/react-router-dom": "^5.1.7",
     "@types/styled-components": "^5.1.9",
+    "embla-carousel": "^4.5.3",
     "query-string": "^7.0.0",
     "react": "^17.0.2",
     "react-contenteditable": "^3.3.5",

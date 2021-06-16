@@ -46,7 +46,10 @@ class Dropdown extends React.Component<IProps, IState>{
 
     constructor(props:IProps) {
         super(props);
-        this.menuLists = AppRoutes;
+        this.menuLists = AppRoutes.map(el => {
+            el.routes = el.routes.filter(route => route.shownInMenu)
+            return el;
+        });
         this.state = {
             height: 0,
             lists: this.menuLists

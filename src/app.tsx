@@ -39,10 +39,12 @@ const MainContainer = styled.section`
 
 const ContentContainer = styled.section`
     margin: 10px 20px;
-    flex: 1;
-    min-width: 0;
+    width: 100%;    
     @media ${Breakpoints.tablet} {
         margin: 0 40px;
+        flex: 1;
+        min-width: 0;
+
     }
 `;
 

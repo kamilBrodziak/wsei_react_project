@@ -5,6 +5,7 @@ export interface IAppRoute {
     icon?: string,
     iconAlt?: string;
     exact?: boolean;
+    shownInMenu: boolean;
 }
 
 export interface IAppRoutes {
