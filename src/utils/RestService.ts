@@ -1,6 +1,7 @@
+import { IComment, IRestComment } from "./IRestComments";
 import { IPhoto } from "./IRestFiles";
 import { IRestPost } from "./IRestPost";
-import { IQueryOptions } from "./IRestQuery";
+import { IQuery, IQueryOptions } from "./IRestQuery";
 import { IFee, IProposal, IReview, IUser, IUserAdditionalInformation } from "./IRestUser";
 
 const API = "https://jsonplaceholder.typicode.com";
@@ -12,7 +13,20 @@ interface IJsonPostRest {
     body: string;
 }
 
-export const getQueryString = (options:IQueryOptions) => Object.entries(options).map((val) => `${val[0]}=${val[1]}`).join("&")
+
+export const getQueryString = (options:IQueryOptions) => {
+    let query:string[] = [];
+    if(options._like){
+        query = [...query, ...Object.entries(options._like).map(val => `${val[0]}_like=${val[1]}`)]
+    }
+    if(options._page) {
+        query.push(`_page=${options._page}`);
+    }
+    if(options._limit) {
+        query.push(`_limit=${options._limit}`);
+    }
+    return query.join("&");
+}
 
 class RestService {
     public static getPhoto(id: number) : Promise<IPhoto> {
@@ -23,8 +37,22 @@ class RestService {
         return fetch(`${API}/users/${id}`).then(response => response.json());
     }
 
+    public static getCommentQuery(queryStr: string):Promise<IQuery<IComment[]>> {
+        return fetch(`${API}/comments?${queryStr}`)
+            .then((response) => response.json().then((items:IRestComment[]) => ({
+                items: items,
+                total:parseInt(response.headers.get("X-TOTAL-COUNT"))
+            }))).then((json:IQuery<IRestComment[]>) => ({
+                ...json,
+                items: json.items.map(val => ({
+                        ...val,
+                        userId: 1
+                    }))
+                }
+            ));
+    }
+
     public static getPostQuery(queryStr: string):Promise<IRestPost[]> {
-        console.log(`${API}/posts?${queryStr}`)
         return fetch(`${API}/posts?${queryStr}`).then(response => response.json()).then((json:IJsonPostRest[]) => {
             return json.map(val => {
                 return {

@@ -41,7 +41,7 @@ const ShortPostStyled = styled(ShortPost)`
 
 const TitleStyled = styled.h2`
     color: ${Colors.darkGray};
-    font-size: 2.2rem;
+    font-size: 2.5rem;
     font-weight: bold;
     margin: 0 0 10px 0;
 `

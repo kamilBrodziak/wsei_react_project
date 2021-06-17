@@ -17,7 +17,7 @@ export const fetchPostsPromise = (ids:number[]) => {
 
 export const getQueryPost = (options: IQueryOptions) => (dispatch:Dispatch<TFetchFullPostAction>, getState:() => IStore) => {
     const state = getState();
-    return state.postState.queries[getQueryString(options)]?.map(id => getPost(id, state));
+    return state.postState.queries[getQueryString(options)]?.map(id => getPost(id, state.postState.posts, state.photoState.photos, state.userState.users));
 }
 
 export const getPosts = (options:IQueryOptions, queries:{[key:string]:number[]}, posts:{[key:number]:IRestPost},

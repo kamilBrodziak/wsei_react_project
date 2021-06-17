@@ -63,11 +63,9 @@ interface IProps {
 
 const Pagination:FC<IProps> = ({onClick, page, maxPage}) => {
     maxPage = maxPage - 1;
-    const [currPage, setCurrPage] = useState(page);
     const [ref, { width }] = useMeasure<HTMLElement>();
     const isDesktop = () => width > 560;
     const handleOnClick = (change: number) => {
-        setCurrPage(change);
         onClick(change);
     }
     const wrapWithListItem = (element:JSX.Element, key:number) => <PaginationListItem key={key}>{element}</PaginationListItem>
@@ -77,21 +75,21 @@ const Pagination:FC<IProps> = ({onClick, page, maxPage}) => {
             </PaginationButton>, key)
     const elements = [];
     let key = 0;
-    if(currPage > 0) elements.push(generateButtonItem(currPage - 1, '<', key++))
-    if(currPage > 2 && isDesktop()) elements.push(generateButtonItem(0, 1, key++))
-    if(currPage > 3 && isDesktop()) elements.push(wrapWithListItem(<Dots>...</Dots>, key++))
-    const min = () => isDesktop() ? (currPage > 2 ? currPage - 2 : 0) : ((currPage > 0) ? currPage - 1: 0);
-    const max = () => isDesktop() ? (currPage + 2 <= maxPage ? currPage + 2: maxPage) : (currPage + 1 <= maxPage ? currPage + 1 : maxPage) 
+    if(page > 0) elements.push(generateButtonItem(page - 1, '<', key++))
+    if(page > 2 && isDesktop()) elements.push(generateButtonItem(0, 1, key++))
+    if(page > 3 && isDesktop()) elements.push(wrapWithListItem(<Dots>...</Dots>, key++))
+    const min = () => isDesktop() ? (page > 2 ? page - 2 : 0) : ((page > 0) ? page - 1: 0);
+    const max = () => isDesktop() ? (page + 2 <= maxPage ? page + 2: maxPage) : (page + 1 <= maxPage ? page + 1 : maxPage) 
     for (let i = min(); i <= max(); i++) {
-        if(i !== currPage) {
+        if(i !== page) {
             elements.push(generateButtonItem(i, i + 1, key++))
         } else {
             elements.push(wrapWithListItem(<CurrentItem>{i + 1}</CurrentItem>, key++))
         }
     }
-    if(currPage < maxPage - 3 && isDesktop()) elements.push(wrapWithListItem(<Dots>...</Dots>, key++));
-    if(currPage < maxPage - 2 && isDesktop()) elements.push(generateButtonItem(maxPage, maxPage + 1, key++));
-    if(currPage < maxPage) elements.push(generateButtonItem(currPage + 1, '>', key++));
+    if(page < maxPage - 3 && isDesktop()) elements.push(wrapWithListItem(<Dots>...</Dots>, key++));
+    if(page < maxPage - 2 && isDesktop()) elements.push(generateButtonItem(maxPage, maxPage + 1, key++));
+    if(page < maxPage) elements.push(generateButtonItem(page + 1, '>', key++));
     return (
         <PaginationStyled ref={ref}>
             <PaginationList>

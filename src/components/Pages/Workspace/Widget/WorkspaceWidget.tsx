@@ -21,7 +21,7 @@ interface IProps {
 
 const WorkspaceWidget:FC<IProps> = () => {
     const routes = WorkspacesRoutes;
-    const content = routes.routes.map(route => <Tile route={route}/>)
+    const content = routes.routes.map((route, i) => <Tile key={i} route={route}/>)
     return (
         <WidgetStyled>
             <Title>Workspaces</Title>
