@@ -12,3 +12,5 @@ export interface IAppRoutes {
     label?: string,
     routes: IAppRoute[]
 }
+
+export enum IAppPaths {}

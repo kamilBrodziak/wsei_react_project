@@ -11,6 +11,11 @@ import React, { FC } from "react";
 import Login from "../components/Pages/Account/Login/Login";
 import Register from "../components/Pages/Account/Register/Register";
 import Publication from "../components/Pages/Platform/Publications/Publication";
+import ClientContracts from "../components/Pages/Workspace/ClientContracts/ClientContracts";
+import SupplierContracts from "../components/Pages/Workspace/SupplierContracts/SupplierContracts";
+import Corporate from "../components/Pages/Workspace/Corporates/Corporates";
+import GroupNorms from "../components/Pages/Workspace/GroupNorms/GroupNorms";
+import RealEstateContracts from "../components/Pages/Workspace/RealEstateContracts/RealEstateContracts";
 
 const ComponentRegistry:{[key: string]: typeof React.Component | FC} = {
     "Home": Home,
@@ -22,6 +27,11 @@ const ComponentRegistry:{[key: string]: typeof React.Component | FC} = {
     "Profile": Profile,
     "Privacy": Privacy,
     "Settings": Settings,
+    'Client contract':ClientContracts,
+    'Supplier contract':SupplierContracts,
+    'Corporate':Corporate,
+    'Group Norms':GroupNorms,
+    'Real estate contracts':RealEstateContracts,
     "Logout": Logout,
     "Login": Login,
     "Register": Register

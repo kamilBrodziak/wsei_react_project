@@ -1,7 +1,13 @@
 import AccountRoutes from "./AccountRoutes";
 import { IAppRoutes } from "./IRoutes";
-import PlatformRoutes from "./PlatformRoutes";
-import WorkspacesRoutes from "./WorkspacesRoutes";
+import PlatformRoutes, { PlatformPaths } from "./PlatformRoutes";
+import WorkspacesRoutes, { WorkspacesPaths } from "./WorkspacesRoutes";
+
+const AppPaths = {
+    platform: PlatformPaths,
+    workspace: WorkspacesPaths,
+}
+
 
 const AppRoutes: IAppRoutes[] = [
     PlatformRoutes,
@@ -12,5 +18,5 @@ const AllRoutes: IAppRoutes[] = [
     ...AppRoutes,
     AccountRoutes
 ]
-export {AllRoutes};
+export {AllRoutes, AppPaths};
 export default AppRoutes;
