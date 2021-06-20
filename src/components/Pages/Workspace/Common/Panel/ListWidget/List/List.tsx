@@ -44,6 +44,14 @@ const MetaImagesContainer = styled.div`
 
 `
 
+interface ITextIconStyledProps {
+    color: string;
+}
+
+const TextIconStyled = styled(IconWithText)<ITextIconStyledProps>`
+    color: ${props => props.color};
+`
+
 const MetaDateText = styled.span`
     display: block;
     padding: 0 15px;
@@ -55,6 +63,8 @@ const MetaDateText = styled.span`
 
 interface IData extends IExtendedComment {
     icon: string;
+    color: string;
+    group:string;
 }
 
 interface IProps {
@@ -67,7 +77,7 @@ const List:FC<IProps> = ({comments}) => {
         <BodyStyled>{comment.body}</BodyStyled>
         <MetaStyled>
             <MetaImagesContainer>
-                <IconWithText icon={comment.icon} iconAlt={"icon"} text={"Subsid corp."} />
+                <TextIconStyled color={comment.color} icon={comment.icon} iconAlt={"icon"} text={comment.group} />
             </MetaImagesContainer>
             <MetaDateText>
                 Updated 3 days ago by {comment.user.name}

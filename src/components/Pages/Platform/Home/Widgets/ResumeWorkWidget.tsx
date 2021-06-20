@@ -18,6 +18,10 @@ import { TCommentQueries } from '../../../../../reducers/commentReducer';
 import useFetching from '../../../../../hooks/useFetching';
 import useQuerySearch from '../../../../../hooks/useQuerySearch';
 import useContentPaginated from '../../../../../hooks/useContentPaginated';
+import OptionsDropdown, { IDropdownOption } from '../../../../Common/Dropdowns/OptionsDropdown';
+import AllIcon from '../../../../../assets/icons/all.svg';
+import FollowedIcon from '../../../../../assets/icons/signal.svg' 
+import MyIcon from '../../../../../assets/icons/user.svg' 
 
 const WidgetStyled = styled.section`
     margin: 20px 0 0 0;
@@ -82,13 +86,32 @@ const ResumeWorkWidget:FC<IProps> = ({comments, queries, users, loading, fetchCo
         changeOption({_like:{name:search}, _page:1})
     }
     
-
+    const dropdownOptions:IDropdownOption[] = [
+        {
+            text: 'Followed',
+            icon: FollowedIcon, 
+            iconAlt: 'followed icon',
+            onSelect: () => null
+        },
+        {
+            text: 'All',
+            icon: AllIcon, 
+            iconAlt: 'all icon',
+            onSelect: () => null
+        },
+        {
+            text: 'My',
+            icon: MyIcon, 
+            iconAlt: 'my icon',
+            onSelect: () => null
+        }
+    ]
     return (
         <WidgetStyled>
             <HeaderStyled>
                 <TitleStyled>Resume your work</TitleStyled>
                 <SearchInputStyled placeholder="Filter by title..." value={options?._like?.name} onSubmit={onSubmit} />
-                <Navstyled>Followed</Navstyled>
+                <Navstyled><OptionsDropdown data={dropdownOptions} /></Navstyled>
             </HeaderStyled>
             {content}
             {/* <Pagination page={options._page - 1} maxPage={Math.ceil(total / options._limit)} onClick={paginationAction}/> */}

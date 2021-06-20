@@ -13,6 +13,10 @@ import SearchInput from '../../../../../Common/Inputs/SearchInput';
 import Options from './Options/Options';
 import List from './List/List';
 import ExampleIcon from '../../../../../../assets/icons/entities.svg';
+import OptionsDropdown, { IDropdownOption } from '../../../../../Common/Dropdowns/OptionsDropdown';
+import AllIcon from '../../../../../../assets/icons/all.svg';
+import FollowedIcon from '../../../../../../assets/icons/signal.svg' 
+import MyIcon from '../../../../../../assets/icons/user.svg' 
 
 const WidgetStyled = styled.section`
     margin: 20px 0 0 0;
@@ -111,18 +115,38 @@ const ListWidget:FC<IProps> = ({comments, queries, users, loading, fetchComments
         (options:IQueryOptions)=> fetchComments(options),
         loading,
         (options:IQueryOptions) => getComments(options, queries, comments, users),
-        (data)=> <List comments={data.map(el => ({...el, icon: ExampleIcon}))}/>);
+        (data)=> <List comments={data.map(el => ({...el, icon: optionsData[1].icon, color:optionsData[1].color, group:optionsData[1].text}))}/>);
     const onSubmit = (search:string) => {
         changeOption({_like:{name:search}, _page:1})
     }
     
+    const dropdownOptions:IDropdownOption[] = [
+        {
+            text: 'Followed',
+            icon: FollowedIcon, 
+            iconAlt: 'followed icon',
+            onSelect: () => null
+        },
+        {
+            text: 'All',
+            icon: AllIcon, 
+            iconAlt: 'all icon',
+            onSelect: () => null
+        },
+        {
+            text: 'My',
+            icon: MyIcon, 
+            iconAlt: 'my icon',
+            onSelect: () => null
+        }
+    ]
     
     return (
         <WidgetStyled>
             <HeaderStyled>
                 <TitleStyled>Latest updates</TitleStyled>
                 <SearchInputStyled placeholder="Filter by title..." value={options?._like?.name} onSubmit={onSubmit} />
-                <Navstyled>Followed</Navstyled>
+                <Navstyled><OptionsDropdown data={dropdownOptions} /></Navstyled>
             </HeaderStyled>
             <Options options={optionsData}/>
             {content}
