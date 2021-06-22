@@ -45,7 +45,7 @@ const dateToString = (pattern:string, date:Date) => {
         switch(attr.length) {
             case 0: return "";
             case 1: return "" + dateAttrs[name];
-            case 2: return (dateAttrs[name] < 10 ? "" : "0") + dateAttrs[name];
+            case 2: return (dateAttrs[name] < 10 ? "0" : "") + dateAttrs[name];
             case 3: if(dateStrings[name]) return dateStrings[name][dateAttrs[name] - 1].slice(0,3);
             case 4: if(dateStrings[name]) return dateStrings[name][dateAttrs[name] - 1];
             default: return attr;

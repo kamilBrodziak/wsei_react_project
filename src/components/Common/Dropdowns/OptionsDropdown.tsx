@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import useDropdown from 'react-dropdown-hook';
 import styled from 'styled-components';
 import IconWithText from '../Icons/IconWithText';
@@ -27,6 +27,7 @@ const Header = styled.div`
 
 const Dropdown = styled.ul`
     position: absolute;
+    z-index: 100;
     top: 100%;
     left: 0;
     width: 100%;
@@ -54,29 +55,43 @@ const DropdownElButton = styled(Button)`
     padding: 8px;
 `
 
+const TextStyled = styled.span`
+    display: flex;
+    align-items: center;
+`
+
 export interface IDropdownOption {
     text: string;
-    icon: string;
-    iconAlt: string;
-    onSelect: () => void;
+    icon?: string;
+    iconAlt?: string;
+    onSelect?: () => void;
 }
 
-interface IProps {
+interface IProps{
     data: IDropdownOption[];
+    handleSelect?: (id:number) => void;
+    className?:string;
+    selected?: number;
 }
 
-const OptionsDropdown:FC<IProps> = ({data}) => {
+const OptionsDropdown:FC<IProps> = ({data, handleSelect, className, selected}) => {
     const [wrapperRef, dropdownOpen, toggleDropdown, closeDropdown] = useDropdown();
-    const [active, setActive] = useState(0);
+    const [active, setActive] = useState(selected ? selected : 0);
     const handleOnClick = (id:number) => {
         setActive(id);
         closeDropdown();
+        if(handleSelect) {
+            handleSelect(id);
+        }
     }
     return (
-        <OptionsDropdownStyled ref={wrapperRef}>
+        <OptionsDropdownStyled ref={wrapperRef} className={className}>
             <Header>
                 <DropdownElButton width="100%" height="auto" onClick={toggleDropdown} >
-                    <IconWithText icon={data[active].icon} iconAlt={data[active].iconAlt} text={data[active].text} />
+                    { data[active].icon ? 
+                        <IconWithText icon={data[active].icon} iconAlt={data[active].iconAlt} text={data[active].text} /> :
+                        <TextStyled>{data[active].text}</TextStyled>
+                    }
                     <Figure width="9px" height="100%">
                         <Icon src={IconArrow} alt={'arrow down icon'}/>
                     </Figure>
@@ -86,7 +101,10 @@ const OptionsDropdown:FC<IProps> = ({data}) => {
                 {
                     data.map((el, i) => <DropdownEl active={active === i} key={i} >
                         <DropdownElButton width="100%" height="auto" onClick={(e) => handleOnClick(i)}>
-                            <IconWithText icon={el.icon} iconAlt={el.iconAlt} text={el.text} />
+                            { data[active].icon ? 
+                                <IconWithText icon={el.icon} iconAlt={el.iconAlt} text={el.text} /> :
+                                <TextStyled>{el.text}</TextStyled>
+                            }
                         </DropdownElButton>
                     </DropdownEl>)
                 }    
