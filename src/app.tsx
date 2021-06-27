@@ -14,6 +14,7 @@ import { loginUserAction} from "./actions/UserActions";
 import { connect } from "react-redux";
 import { IRootState } from "./reducers/rootReducer";
 import Breakpoints from "./styledHelpers/Breakpoints";
+import Page404 from "./components/Pages/404";
 
 
 

@@ -16,6 +16,7 @@ import SupplierContracts from "../components/Pages/Workspace/SupplierContracts/S
 import Corporate from "../components/Pages/Workspace/Corporates/Corporates";
 import GroupNorms from "../components/Pages/Workspace/GroupNorms/GroupNorms";
 import RealEstateContracts from "../components/Pages/Workspace/RealEstateContracts/RealEstateContracts";
+import Page404 from "../components/Pages/404";
 
 const ComponentRegistry:{[key: string]: typeof React.Component | FC} = {
     "Home": Home,
@@ -34,7 +35,8 @@ const ComponentRegistry:{[key: string]: typeof React.Component | FC} = {
     'Real estate contracts':RealEstateContracts,
     "Logout": Logout,
     "Login": Login,
-    "Register": Register
+    "Register": Register,
+    '404': Page404
 }
 
 export default ComponentRegistry;
